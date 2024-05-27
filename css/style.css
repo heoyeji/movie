@@ -1,0 +1,219 @@
+@charset "utf-8";
+
+/* header */
+header {
+  padding: 15px 20px 15px 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 > a {
+  display: flex;
+  font-family: "Irish Grover", system-ui;
+  font-size: 50px;
+  align-items: center;
+  gap: 15px;
+}
+
+header h1 img {
+  width: 80px;
+}
+
+header ul {
+  display: flex;
+  /* gap: 20px; */
+  align-items: center;
+  font-weight: bold;
+}
+
+header li {
+  padding: 0px 20px;
+  font-size: 20px;
+}
+
+header ul li:nth-child(2) {
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+}
+
+header ul li:nth-child(4) {
+  border: 1px solid #333;
+  border-radius: 50px;
+  padding: 10px 15px 10px 20px;
+  margin: 0px 20px;
+  align-items: center;
+  display: flex;
+}
+
+header input {
+  width: 220px;
+  border: none;
+  outline: none;
+}
+
+header .fa-user {
+  font-size: 30px !important;
+}
+
+/*visual*/
+
+#visual {
+  padding: 55px 0px 50px;
+  width: 100%;
+  height: 90vh;
+  background-image: url(../img/bg\ 1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  /* align-items: center; */
+}
+
+#visual .video {
+  margin: 0px auto;
+  width: 60vw;
+  height: 60vh;
+}
+
+#visual iframe {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 100px #666;
+}
+
+/*container*/
+
+#container {
+  background-color: #222;
+  width: 100%;
+}
+
+#container li {
+  width: 85%;
+  margin: 0px auto;
+  /* background-color: orange; */
+}
+
+#container li h2 {
+  font-size: 30px;
+  color: var(--text-color-white);
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  align-items: flex-end;
+}
+
+#container li h2 span {
+  font-size: 20px;
+}
+
+#container ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 2%;
+}
+
+#container ul li {
+  width: calc(100% / 5);
+}
+
+#container li img {
+  width: 100%;
+  height: 23vw;
+  object-fit: cover;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px #fff;
+}
+
+#container ul .posterhover {
+  width: 100%;
+  position: relative;
+}
+
+#container ul .posterhover:hover img {
+  filter: brightness(0.6);
+}
+
+#container ul .posterhover:hover .posttitle {
+  opacity: 1;
+}
+
+#container ul .posterhover:hover .postp {
+  opacity: 1;
+}
+
+#container ul .posterhover:hover .postrate {
+  opacity: 1;
+}
+
+#container .posttitle {
+  width: 90%;
+  font-size: 30px;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  text-align: center;
+  word-break: keep-all;
+  position: absolute;
+  top: 15%;
+  opacity: 0;
+  z-index: 9;
+}
+
+#container ul .postp {
+  width: 85%;
+  height: 40%;
+  position: absolute;
+  top: 55%;
+  background-color: transparent;
+  font-weight: bold;
+  text-align: left;
+  color: white;
+  text-shadow: 0px 0px 1px black;
+  transform: translate(0, -50%);
+  opacity: 0;
+  z-index: 9;
+  overflow: hidden;
+}
+
+#container ul .postrate {
+  font-size: 20px;
+  color: white;
+  position: absolute;
+  right: 15%;
+  bottom: 15%;
+  opacity: 0;
+  z-index: 9;
+}
+
+#container ul .fa-star {
+  color: gold;
+}
+
+#container ul li div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 5%;
+}
+
+#container ul li div p {
+  width: 40%;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#container ul li div .fa-heart {
+  color: #e40000;
+}
+
+#container ul li.on .fa-heart {
+  font-weight: bold;
+}
