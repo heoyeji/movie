@@ -1,6 +1,25 @@
 const apiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
 const language = "ko-KR";
 
+// 모달 요소
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modal-title");
+const modalImg = document.getElementById("modal-img");
+const modalOverview = document.getElementById("modal-overview");
+const modalRate = document.getElementById("modal-rate");
+const span = document.getElementsByClassName("close")[0];
+
+// 모달 닫기
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
 // 인기순
 fetch(
   `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}`
@@ -16,8 +35,8 @@ fetch(
       data.results[0],
       data.results[1],
       data.results[2],
+      data.results[3],
       data.results[4],
-      data.results[5],
     ]; // 인기 있는 영화 중 첫 5개만 선택
     const popularList = document.querySelector("#popular ul");
     popularList.innerHTML = ""; // 기존에 있던 영화들 제거
@@ -128,7 +147,7 @@ function createListItem(movie) {
   div.appendChild(likeButton);
 
   const detailButton = document.createElement("p");
-  detailButton.innerHTML = `<a href="#">상세보기</a>`;
+  detailButton.innerHTML = `<a href="#" class="detail-btn" data-id="${movie.id}">상세보기</a>`;
   div.appendChild(detailButton);
 
   listItem.appendChild(posterHover);
