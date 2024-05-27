@@ -25,7 +25,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 3%;
+  gap: 4%;
 }
 
 #container.filon ul {
@@ -33,13 +33,13 @@
 }
 
 #container ul li {
-  width: calc(91% / 4);
+  width: calc(88% / 4);
   margin: 15px 0 35px;
 }
 
 #container ul li img {
   width: 100%;
-  height: 24vw;
+  height: 25vw;
   object-fit: cover;
   border: 1px solid #fff;
   border-radius: 20px;
@@ -215,7 +215,7 @@
   padding: 0px 20px;
 }
 
-#filter ul li.on {
+#filter .filC li.on {
   background-color: #ffae005c;
   border-radius: 25px;
   letter-spacing: 3px;
@@ -227,6 +227,15 @@
 #filter .filG {
   height: 300px;
   overflow-y: scroll;
+}
+
+#filter .filG li.on {
+  background-color: #ffae005c;
+  border-radius: 25px;
+  letter-spacing: 3px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 3px orange;
 }
 
 #filter.scDown .filG {
