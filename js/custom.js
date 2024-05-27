@@ -35,8 +35,8 @@ fetch(
       data.results[0],
       data.results[1],
       data.results[2],
+      data.results[3],
       data.results[4],
-      data.results[5],
     ]; // 인기 있는 영화 중 첫 5개만 선택
     const popularList = document.querySelector("#popular ul");
     popularList.innerHTML = ""; // 기존에 있던 영화들 제거
