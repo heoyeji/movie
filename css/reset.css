@@ -29,7 +29,9 @@ address {
 }
 
 body {
+  font-family: "Noto Sans KR", sans-serif;
   color: #333;
+  word-break: keep-all;
 }
 
 html {
