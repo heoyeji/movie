@@ -2,7 +2,7 @@ const movieApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
 const movieLanguage = "ko-KR";
 
 // 모달 요소
-const modal = document.getElementById("modal");
+const movieModal = document.querySelector("#movieModal");
 const modalTitle = document.getElementById("modal-title");
 const modalImg = document.getElementById("modal-img");
 const modalOverview = document.getElementById("modal-overview");
@@ -11,12 +11,12 @@ const span = document.getElementsByClassName("close")[0];
 
 // 모달 닫기
 span.onclick = function () {
-  modal.style.display = "none";
+  wishlistModal.style.display = "none";
 };
 
 window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  if (event.target == movieModal) {
+    movieModal.style.display = "none";
   }
 };
 
@@ -208,7 +208,7 @@ document.addEventListener("click", function (event) {
         document.getElementById("modal-genre").textContent = genreNames;
         document.getElementById("modal-release-date").textContent =
           formattedReleaseDate;
-        modal.style.display = "block";
+        movieModal.style.display = "block";
       });
   }
 });
