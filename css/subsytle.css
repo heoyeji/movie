@@ -101,7 +101,7 @@
 
 #container ul .postp {
   width: 85%;
-  height: 40%;
+  height: 42%;
   position: absolute;
   top: 53%;
   background-color: transparent;
@@ -109,6 +109,7 @@
   text-align: left;
   color: white;
   text-shadow: 0px 0px 1px #000;
+  /* word-break: keep-all; */
   transform: translate(0, -50%);
   opacity: 0;
   z-index: 9;
