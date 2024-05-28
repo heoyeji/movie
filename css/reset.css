@@ -77,9 +77,13 @@ header ul {
   font-weight: bold;
 }
 
-header li {
+header ul li {
   padding: 0px 20px;
   font-size: 20px;
+}
+
+header ul li.on {
+  color: var(--point-color-orange);
 }
 
 header ul li:hover {

@@ -42,13 +42,14 @@ const options = {
   },
 };
 
-// 카테고리
+// 카테고리 선택
+let hmenu = document.querySelectorAll(".hmenu li");
+let subtitle = document.querySelector("#subtitle");
+const filC = document.querySelectorAll(".filC li");
 
 let page = 1;
 let cID = "popular";
-let subtitle = document.querySelector("#subtitle");
-
-const filC = document.querySelectorAll(".filC li");
+let gID = "";
 
 for (let i = 0; i < filC.length; i++) {
   filC[i].addEventListener("click", (e) => {
@@ -59,39 +60,64 @@ for (let i = 0; i < filC.length; i++) {
     }
 
     filC[i].classList.add("on");
+
+    for (j of hmenu) {
+      j.classList.remove("on");
+    }
+
+    hmenu[i].classList.add("on");
   });
 }
 
-const getmovie = async (e) => {
-  subname = "인기순";
+// 영화 출력
+const getmovie = async (e, g) => {
+  // 카테고리 선택(제목 바꾸기)
+  subname = `인기순`;
+  subtitle.innerHTML = subname;
 
   if (e) {
     cID = e.target.id;
 
     if (cID == "popular") {
-      subname = "인기순";
+      subname = `인기순`;
     } else if (cID == "top_rated") {
-      subname = "평점순";
+      subname = `평점순`;
     } else if (cID == "upcoming") {
-      subname = "최신순";
+      subname = `최신순`;
     }
 
     subtitle.textContent = subname;
   }
 
+  // 영화 api
   let response = await fetch(
-    `https://api.themoviedb.org/3/movie/${cID}?language=ko-KR&page=${page}`,
+    `https://api.themoviedb.org/3/movie/${cID}?language=ko-KR&page=${page}
+    `,
     options
   );
 
-  //
-
   let data = await response.json();
+
   let mList = data.results;
   console.log(mList);
 
-  let gIDs = mList[0].genre_ids;
-  console.log(gIDs);
+  // if (g) {
+  //   gID = g.target.id;
+  //
+  //     let gresponse = await fetch(
+  //       `https://api.themoviedb.org/3/movie/${cID}?language=ko-KR`,
+  //       options
+  //
+
+  //     let gdata = await response.json();
+
+  //     let mgList = gdata.results;
+  //     console.log(mgList);
+  //   }
+  // }
+
+  // let gIDs = mList[0].genre_ids;
+  // console.log(gIDs);
 
   let show = "";
 
@@ -120,6 +146,7 @@ getmovie();
 // 장르
 
 let filG = document.querySelector(".filG");
+let gtitle = document.querySelector(".gtitle");
 
 const getgenres = async () => {
   let load = await fetch(
@@ -132,23 +159,28 @@ const getgenres = async () => {
 
   // 장르 목록 입력
 
-  let gname = "";
+  let loadgname = "";
 
   for (let i = 0; i < gList.length; i++) {
-    gname += `<li id="${gList[i].id}">${gList[i].name}</li>`;
+    loadgname += `<li id="${gList[i].id}">${gList[i].name}</li>`;
   }
 
-  filG.innerHTML = gname;
+  filG.innerHTML = loadgname;
 
   // 장르 선택
   let genre = document.querySelectorAll(".filG li");
+  let gname = "";
 
   for (let i = 0; i < genre.length; i++) {
-    genre[i].addEventListener("click", () => {
+    genre[i].addEventListener("click", (g) => {
+      getmovie(g);
+
       for (j of genre) {
         j.classList.remove("on");
       }
       genre[i].classList.add("on");
+
+      gname = gList[i].name;
     });
   }
 };
