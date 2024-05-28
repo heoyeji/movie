@@ -1,5 +1,5 @@
-const apiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
-const language = "ko-KR";
+const movieApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
+const movieLanguage = "ko-KR";
 
 // 모달 요소
 const modal = document.getElementById("modal");
@@ -22,7 +22,7 @@ window.onclick = function (event) {
 
 // 인기순
 fetch(
-  `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/popular?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -52,7 +52,7 @@ fetch(
 
 // 평점순
 fetch(
-  `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/top_rated?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -76,7 +76,7 @@ fetch(
 
 // 개봉예정
 fetch(
-  `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/upcoming?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -163,7 +163,7 @@ document.addEventListener("click", function (event) {
     const movieId = event.target.dataset.id;
 
     fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}`
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${movieApiKey}&language=${movieLanguage}`
     )
       .then((response) => {
         if (!response.ok) {

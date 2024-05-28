@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>search</title>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link
@@ -13,7 +13,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-
     <!-- 폰트 -->
     <link
       href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Noto+Sans+KR:wght@100..900&display=swap"
@@ -23,7 +22,7 @@
   <body>
     <header>
       <h1>
-        <a href="#"><img class="logo" src="img/logo.png" />Heoigo</a>
+        <a href="#"><img class="logo" src="img/logo.png" alt="logo" />Heoigo</a>
       </h1>
       <ul>
         <li><a href="#">인기순</a></li>
@@ -40,7 +39,7 @@
           </button>
         </li>
         <li>
-          <a href="#"><i class="fa-solid fa-user"></i></a>
+          <a href="#" id="wishlistButton"><i class="fa-solid fa-user"></i></a>
         </li>
       </ul>
     </header>
@@ -63,70 +62,27 @@
         <h2>
           인기순<span><a href="#">더보기 ></a></span>
         </h2>
-
         <ul>
           <li>
             <div class="posterhover">
               <h3 class="posttitle">movie title</h3>
               <p class="postp">영화 줄거리~</p>
               <h4 class="postrate"><i class="fa-solid fa-star"></i> n.n점</h4>
-              <img src="img/가필드.jpg" />
+              <img src="img/가필드.jpg" alt="movie poster" />
             </div>
             <div>
-              <p><i class="fa-regular fa-heart"></i> 찜하기</p>
+              <p
+                onclick="addToWishlist(1, 'movie title', '영화 줄거리~', 'img/가필드.jpg')"
+              >
+                <i class="fa-regular fa-heart"></i> 찜하기
+              </p>
               <p>상세보기</p>
             </div>
           </li>
-          <li>
-            <div class="posterhover">
-              <h3 class="posttitle">movie title</h3>
-              <p class="postp">영화 줄거리~</p>
-              <h4 class="postrate"><i class="fa-solid fa-star"></i> n.n점</h4>
-              <img src="img/가필드.jpg" />
-            </div>
-            <div>
-              <p><i class="fa-regular fa-heart"></i> 찜하기</p>
-              <p>상세보기</p>
-            </div>
-          </li>
-          <li>
-            <div class="posterhover">
-              <h3 class="posttitle">movie title</h3>
-              <p class="postp">영화 줄거리~</p>
-              <h4 class="postrate"><i class="fa-solid fa-star"></i> n.n점</h4>
-              <img src="img/가필드.jpg" />
-            </div>
-            <div>
-              <p><i class="fa-regular fa-heart"></i> 찜하기</p>
-              <p>상세보기</p>
-            </div>
-          </li>
-          <li>
-            <div class="posterhover">
-              <h3 class="posttitle">movie title</h3>
-              <p class="postp">영화 줄거리~</p>
-              <h4 class="postrate"><i class="fa-solid fa-star"></i> n.n점</h4>
-              <img src="img/가필드.jpg" />
-            </div>
-            <div>
-              <p><i class="fa-regular fa-heart"></i> 찜하기</p>
-              <p>상세보기</p>
-            </div>
-          </li>
-          <li>
-            <div class="posterhover">
-              <h3 class="posttitle">movie title</h3>
-              <p class="postp">영화 줄거리~</p>
-              <h4 class="postrate"><i class="fa-solid fa-star"></i> n.n점</h4>
-              <img src="img/가필드.jpg" />
-            </div>
-            <div>
-              <p><i class="fa-regular fa-heart"></i> 찜하기</p>
-              <p>상세보기</p>
-            </div>
-          </li>
+          <!-- 반복될 영화 리스트 -->
         </ul>
       </li>
+      <!-- 동일한 구조의 다른 리스트들 -->
       <li id="best" class="pTop">
         <h2>
           평점순<span><a href="#">더보기 ></a></span>
@@ -141,7 +97,11 @@
               <img src="img/가필드.jpg" />
             </div>
             <div>
-              <p><i class="fa-regular fa-heart"></i> 찜하기</p>
+              <p
+                onclick="addToWishlist(1, 'movie title', '영화 줄거리~', 'img/가필드.jpg')"
+              >
+                <i class="fa-regular fa-heart"></i> 찜하기
+              </p>
               <p>상세보기</p>
             </div>
           </li>
@@ -161,13 +121,25 @@
               <img src="img/가필드.jpg" />
             </div>
             <div>
-              <p><i class="fa-regular fa-heart"></i> 찜하기</p>
+              <p
+                onclick="addToWishlist(1, 'movie title', '영화 줄거리~', 'img/가필드.jpg')"
+              >
+                <i class="fa-regular fa-heart"></i> 찜하기
+              </p>
               <p>상세보기</p>
             </div>
           </li>
         </ul>
       </li>
     </ul>
+    <!-- 찜 목록 모달 박스 -->
+    <div id="wishlistModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>찜 목록</h2>
+        <ul id="wishlist"></ul>
+      </div>
+    </div>
 
     <!-- 모달 박스 -->
     <div id="modal" class="modal">
@@ -197,13 +169,13 @@
                 <p id="modal-runtime"><span></span></p>
               </li>
             </ul>
-
             <p id="modal-overview">영화 소개</p>
           </li>
         </ul>
       </div>
     </div>
-
     <script src="js/custom.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/likelist.js"></script>
   </body>
 </html>

@@ -2,12 +2,12 @@ const express = require("express");
 const fetch = require("node-fetch");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const API_KEY = "YOUR_TMDB_API_KEY"; // 여기에 발급받은 API 키를 입력하세요.
+const SERVER_API_KEY = "f4b8cdacf728c6b2bd25248d6dd6d6a7"; 
 const BASE_URL = "https://api.themoviedb.org/3";
 
 app.get("/movie/:id", async (req, res) => {
   const movieId = req.params.id;
-  const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`;
+  const url = `${BASE_URL}/movie/${movieId}?api_key=${SERVER_API_KEY}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
