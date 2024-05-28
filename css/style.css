@@ -92,7 +92,6 @@ header .fa-user {
 #container li {
   width: 85%;
   margin: 0px auto;
-  /* background-color: orange; */
 }
 
 #container li h2 {
@@ -177,6 +176,7 @@ header .fa-user {
   z-index: 9;
   overflow: hidden;
   text-align: justify;
+  font-size: 16px;
 }
 
 #container ul .postrate {
@@ -256,7 +256,7 @@ header .fa-user {
 
 .modal .close:hover,
 .modal .close:focus {
-  color: black;
+  color: #000;
   text-decoration: none;
   cursor: pointer;
 }
@@ -286,6 +286,7 @@ header .fa-user {
 }
 
 #modal-title {
+  font-style: italic;
   font-size: 28px;
   padding-left: 15px;
   padding-bottom: 10px;
@@ -294,7 +295,7 @@ header .fa-user {
 }
 
 #modal-img {
-  box-shadow: 7px 8px 8px rgba(0, 0, 0, 0.562);
+  box-shadow: 7px 8px 8px rgba(0, 0, 0, 0.5);
   max-width: 16vw;
   margin: auto;
   border-radius: 10px;

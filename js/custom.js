@@ -1,7 +1,7 @@
 const apiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
 const language = "ko-KR";
 
-// 모달 요소
+// modal
 const modal = document.getElementById("modal");
 const modalTitle = document.getElementById("modal-title");
 const modalImg = document.getElementById("modal-img");
@@ -9,7 +9,7 @@ const modalOverview = document.getElementById("modal-overview");
 const modalRate = document.getElementById("modal-rate");
 const span = document.getElementsByClassName("close")[0];
 
-// 모달 닫기
+// modal close
 span.onclick = function () {
   modal.style.display = "none";
 };
