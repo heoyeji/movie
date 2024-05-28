@@ -31,13 +31,7 @@ fetch(
     return response.json();
   })
   .then((data) => {
-    const popularMovies = [
-      data.results[0],
-      data.results[1],
-      data.results[2],
-      data.results[4],
-      data.results[5],
-    ]; // 인기 있는 영화 중 첫 5개만 선택
+    const popularMovies = data.results.slice(0, 5); // 인기 있는 영화 중 첫 5개만 선택
     const popularList = document.querySelector("#popular ul");
     popularList.innerHTML = ""; // 기존에 있던 영화들 제거
 
@@ -87,7 +81,7 @@ fetch(
   .then((data) => {
     const nowPlayingMovies = data.results.slice(0, 5); // 최신순으로 인기 있는 영화 중 첫 5개만 선택
     const nowPlayingList = document.querySelector("#new ul");
-    nowPlayingList.innerHTML = ""; // 기존에 있던 영화들 제거
+    nowPlayingList.innerHTML = ""; // 기존에 있던 영화 제거
 
     nowPlayingMovies.forEach((movie) => {
       const listItem = createListItem(movie);
@@ -98,7 +92,7 @@ fetch(
     console.error("최신순 오류 발생:", error);
   });
 
-// 영화 정보를 받아서 리스트 아이템으로 만드는 함수
+// 영화 정보 받아서 리스트로 만들기
 function createListItem(movie) {
   const listItem = document.createElement("li");
 
@@ -131,9 +125,9 @@ function createListItem(movie) {
   const likeButton = document.createElement("p");
   likeButton.innerHTML = `<a href="#"><i class="far fa-heart"></i> 찜하기</a>`;
 
-  // 하트 이모티콘을 토글하는 클릭 이벤트 추가
+  // 찜하기 하트 이모티콘 이벤트
   likeButton.addEventListener("click", (e) => {
-    e.preventDefault(); // 기본 동작 막기
+    e.preventDefault();
     const heartIcon = likeButton.querySelector("i");
     if (heartIcon.classList.contains("far")) {
       heartIcon.classList.remove("far");
@@ -156,7 +150,7 @@ function createListItem(movie) {
   return listItem;
 }
 
-// 모달 박스 상세보기 기능 추가
+// 상세보기(modalBox)
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("detail-btn")) {
     event.preventDefault();
@@ -172,10 +166,10 @@ document.addEventListener("click", function (event) {
         return response.json();
       })
       .then((movie) => {
-        // 영화의 개봉일과 장르 정보 가져오기
+        // 영화의 개봉일, 장르 정보
         const genreNames = movie.genres.map((genre) => genre.name).join(", ");
 
-        // 개봉일을 형식에 맞게 포맷팅
+        // 개봉일 포멧
         const releaseDate = new Date(movie.release_date);
         const monthNames = [
           "Jan",
@@ -195,12 +189,12 @@ document.addEventListener("click", function (event) {
           monthNames[releaseDate.getMonth()]
         } ${releaseDate.getFullYear()}`;
 
-        // 영화의 러닝타임을 가져와서 모달에 표시 (시간과 분으로 분리하지 않고 총 분으로 표시)
+        // 러닝타임
         const runtime = movie.runtime;
         const formattedRuntime = `${runtime}분`;
         document.getElementById("modal-runtime").textContent = formattedRuntime;
 
-        // 모달에 개봉일과 장르 정보 표시
+        // modal에 정보표시
         modalTitle.textContent = movie.title;
         modalImg.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
         modalOverview.textContent = movie.overview;

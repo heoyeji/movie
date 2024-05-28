@@ -151,7 +151,7 @@ header .fa-user {
 
 #container .posttitle {
   width: 90%;
-  font-size: 30px;
+  font-size: 28px;
   color: white;
   text-shadow: 1px 1px 2px black;
   text-align: center;
@@ -176,6 +176,7 @@ header .fa-user {
   opacity: 0;
   z-index: 9;
   overflow: hidden;
+  text-align: justify;
 }
 
 #container ul .postrate {
@@ -237,8 +238,7 @@ header .fa-user {
   position: relative;
   margin: auto;
   padding: 50px;
-  border: 1px solid #888;
-  width: 55%;
+  width: 53vw;
   background-color: #fff;
   border-radius: 20px;
   top: 50%;
@@ -248,7 +248,7 @@ header .fa-user {
 .modal .close {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: bold;
 }
 
@@ -288,6 +288,7 @@ header .fa-user {
   padding-left: 15px;
   padding-bottom: 10px;
   border-bottom: 2px solid var(--point-color-orange);
+  text-shadow: 2px 2px 2px #ccc;
 }
 
 #modal-img {
@@ -296,7 +297,9 @@ header .fa-user {
   margin: auto;
   border-radius: 10px;
   margin-right: 30px;
+  cursor: pointer;
 }
+
 #modal-genre::before {
   content: "🎬";
   display: inline-block;
@@ -309,22 +312,26 @@ header .fa-user {
   font-weight: bold;
   border-right: 2px solid #ddd;
 }
+
 #modal-runtime::before {
   content: "⏰";
   display: inline-block;
   margin-right: 10px;
   font-size: 23px;
 }
+
 #modal-runtime {
   font-size: 15px;
   font-weight: bold;
 }
+
 #modal-overview {
   overflow-y: hidden;
   line-height: 2;
   padding: 0px 15px;
   font-size: 15px;
   margin-top: 50px;
+  text-align: justify;
 }
 
 #modal-rating {

@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Heoigo</title>
+    <link rel="website icon" type="png" href="img/logo.png" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link
@@ -21,6 +22,7 @@
     />
   </head>
   <body>
+    <!-- header -->
     <header>
       <h1>
         <a href="#"><img class="logo" src="img/logo.png" />Heoigo</a>
@@ -35,6 +37,8 @@
         </li>
       </ul>
     </header>
+
+    <!-- visual -->
     <div id="visual">
       <div class="video">
         <iframe
@@ -49,12 +53,14 @@
         ></iframe>
       </div>
     </div>
+
+    <!-- container start -->
     <ul id="container">
+      <!-- popular -->
       <li id="popular" class="pTop">
         <h2>
           인기순<span><a href="#">더보기 ></a></span>
         </h2>
-
         <ul>
           <li>
             <div class="posterhover">
@@ -118,6 +124,8 @@
           </li>
         </ul>
       </li>
+
+      <!-- best -->
       <li id="best" class="pTop">
         <h2>
           평점순<span><a href="#">더보기 ></a></span>
@@ -138,6 +146,8 @@
           </li>
         </ul>
       </li>
+
+      <!-- new -->
       <li id="new" class="pTop pBt">
         <h2>
           개봉예정<span><a href="#">더보기 ></a></span>
@@ -159,8 +169,9 @@
         </ul>
       </li>
     </ul>
+    <!-- container end -->
 
-    <!-- 모달 박스 -->
+    <!-- modalBox -->
     <div id="modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -188,7 +199,6 @@
                 <p id="modal-runtime"><span></span></p>
               </li>
             </ul>
-
             <p id="modal-overview">영화 소개</p>
           </li>
         </ul>
