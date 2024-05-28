@@ -1,12 +1,50 @@
+<<<<<<< HEAD
+const searchApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
+const searchLanguage = "ko-KR";
+
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+  const searchButton = document.getElementById("searchButton");
+
+  searchButton.addEventListener("click", () => {
+    const query = searchInput.value.trim();
+    if (query) {
+      window.location.href = `search.html?query=${encodeURIComponent(query)}`;
+    }
+  });
+
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const query = searchInput.value.trim();
+      if (query) {
+        window.location.href = `search.html?query=${encodeURIComponent(query)}`;
+      }
+    }
+  });
+
+  const searchKeyword = getQueryParameter("query");
+  const searchTitle = document.getElementById("searchTitle");
+  if (searchKeyword) {
+    searchTitle.textContent = `"${searchKeyword}" 검색결과`;
+    searchMovies(searchKeyword);
+  }
+});
+=======
 // search.js
 const apiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
 const language = "ko-KR";
+>>>>>>> 03224b318d2542bcda002887d04c1b57ecb1a692
 
 function getQueryParameter(name) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(name);
 }
 
+<<<<<<< HEAD
+function searchMovies(query) {
+  fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${searchApiKey}&language=${searchLanguage}&query=${encodeURIComponent(
+=======
 const query = getQueryParameter("query");
 if (query) {
   searchMovies(query);
@@ -15,6 +53,7 @@ if (query) {
 function searchMovies(query) {
   fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=${language}&query=${encodeURIComponent(
+>>>>>>> 03224b318d2542bcda002887d04c1b57ecb1a692
       query
     )}`
   )
@@ -49,12 +88,39 @@ function searchMovies(query) {
         })`;
 
         const rating = document.createElement("p");
+<<<<<<< HEAD
+        const starIcon = document.createElement("i");
+        starIcon.classList.add("fa-solid", "fa-star", "yellow"); // 여기서 "yellow"는 아이콘의 색상을 노랑색으로 지정하는 클래스명입니다.
+
+        rating.appendChild(starIcon);
+        rating.innerHTML += ` ${movie.vote_average.toFixed(1)} / 10`;
+
+        const overview = document.createElement("div");
+        overview.classList.add("overview");
+        const overviewText = document.createElement("p");
+        overviewText.textContent = movie.overview
+          ? movie.overview
+          : "줄거리 정보 없음";
+        overview.appendChild(overviewText);
+
+        if (movie.overview.length > 100) {
+          const shortOverview = movie.overview.substring(0, 100) + "...";
+          overviewText.textContent = shortOverview;
+          const moreLink = document.createElement("a");
+          moreLink.href = "#";
+          moreLink.textContent = "더보기";
+          moreLink.classList.add("more-link");
+          moreLink.dataset.fullOverview = movie.overview;
+          overview.appendChild(moreLink);
+        }
+=======
         rating.textContent = `평점: ${movie.vote_average} / 10`;
 
         const overview = document.createElement("p");
         overview.textContent = movie.overview
           ? movie.overview
           : "줄거리 정보 없음";
+>>>>>>> 03224b318d2542bcda002887d04c1b57ecb1a692
 
         detailsDiv.appendChild(title);
         detailsDiv.appendChild(rating);
@@ -69,6 +135,15 @@ function searchMovies(query) {
     });
 }
 
+<<<<<<< HEAD
+// 영화 줄거리 더보기 링크를 클릭했을 때 이벤트 처리
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("more-link")) {
+    const overviewText = event.target.dataset.fullOverview;
+    event.target.previousElementSibling.textContent = overviewText;
+    event.target.style.display = "none"; // 더보기 링크 숨기기
+    event.preventDefault(); // 기본 동작 방지
+=======
 document.getElementById("searchButton").addEventListener("click", () => {
   const query = document.getElementById("searchInput").value;
   if (query.trim()) {
@@ -82,5 +157,6 @@ document.getElementById("searchInput").addEventListener("keypress", (e) => {
     if (query.trim()) {
       window.location.href = `search.html?query=${encodeURIComponent(query)}`;
     }
+>>>>>>> 03224b318d2542bcda002887d04c1b57ecb1a692
   }
 });

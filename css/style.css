@@ -1,5 +1,11 @@
 @charset "utf-8";
 
+/* 사용자 정의 CSS 변수 정의 */
+:root {
+  --point-color-orange: #ff9900;
+  /* 다른 변수 정의 */
+}
+
 /* ===== header ===== */
 header {
   padding: 15px 20px 15px 35px;
@@ -22,7 +28,7 @@ header h1 img {
 
 header ul {
   display: flex;
-  /* gap: 20px; */
+  gap: 20px; /* gap 속성 활성화 */
   align-items: center;
   font-weight: bold;
 }
@@ -57,6 +63,13 @@ header input {
   outline: none;
 }
 
+#searchButton {
+  border: none;
+  font-size: 20px;
+  background-color: #fff;
+  color: var(--point-color-orange);
+}
+
 header .fa-user {
   font-size: 30px !important;
 }
@@ -67,12 +80,12 @@ header .fa-user {
   padding: 70px 0px 50px;
   width: 100%;
   height: 90vh;
-  background-image: url(../img/bg\ 1.jpg);
+  background-image: url(../img/bg%201.jpg); /* URL 내 공백 수정 */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   display: flex;
-  /* align-items: center; */
+  align-items: center; /* align-items 속성 활성화 */
 }
 
 #visual .video {
@@ -257,6 +270,40 @@ header .fa-user {
   font-weight: bold;
 }
 
+/* modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+}
+
+.modal-content {
+  border: 5px solid var(--point-color-orange) !important;
+  position: relative;
+  margin: auto;
+  padding: 50px;
+  border: 1px solid #888;
+  width: 50%;
+  background-color: #fff;
+  border-radius: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.modal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
 .modal .close:hover,
 .modal .close:focus {
   color: #000;
@@ -344,4 +391,55 @@ header .fa-user {
   font-size: 18px;
   font-weight: bold;
   color: var(--point-color-orange);
+}
+
+/* 모달 박스 */
+#movieModal.modal {
+  /* 아이디 변경 및 클래스 추가 */
+  /* 기능에 맞게 명확한 아이디와 클래스 사용 */
+  /* 클래스를 추가하여 기본적인 모달 스타일 적용 */
+  /* 아이디를 사용하여 특정 모달에 스타일을 적용할 수 있도록 함 */
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+}
+
+#movieModal .modal-content {
+  /* 모달 콘텐츠 스타일 */
+  /* 특정 모달에 대한 스타일 설정 */
+  border: 5px solid var(--point-color-orange) !important;
+  position: relative;
+  margin: auto;
+  padding: 50px;
+  border: 1px solid #888;
+  width: 50%;
+  background-color: #fff;
+  border-radius: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#movieModal .close {
+  /* 모달 닫기 버튼 스타일 */
+  /* 특정 모달에 대한 스타일 설정 */
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* 추가적인 스타일 설정 */
+/* 이하 추가적인 스타일링 코드 작성 */
+
+.wishlist-poster {
+  width: 100px; /* 포스터의 가로 크기 */
+  height: auto; /* 포스터의 세로 크기를 가로 크기에 맞게 조정 */
+  /* 필요한 다른 스타일 추가 */
 }

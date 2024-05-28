@@ -1,13 +1,24 @@
-const apiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
-const language = "ko-KR";
+const movieApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
+const movieLanguage = "ko-KR";
 
-// modal
-const modal = document.getElementById("modal");
+// 모달 요소
+const movieModal = document.querySelector("#movieModal");
 const modalTitle = document.getElementById("modal-title");
 const modalImg = document.getElementById("modal-img");
 const modalOverview = document.getElementById("modal-overview");
 const modalRate = document.getElementById("modal-rate");
 const span = document.getElementsByClassName("close")[0];
+
+// 모달 닫기
+span.onclick = function () {
+  wishlistModal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == movieModal) {
+    movieModal.style.display = "none";
+  }
+};
 
 // modal close
 span.onclick = function () {
@@ -22,7 +33,7 @@ window.onclick = function (event) {
 
 // 인기순
 fetch(
-  `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/popular?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -46,7 +57,7 @@ fetch(
 
 // 평점순
 fetch(
-  `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/top_rated?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -70,7 +81,7 @@ fetch(
 
 // 개봉예정
 fetch(
-  `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/upcoming?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -150,6 +161,7 @@ function createListItem(movie) {
   return listItem;
 }
 
+// 모달 박스 상세보기 기능 추가
 // 상세보기(modalBox)
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("detail-btn")) {
@@ -157,7 +169,7 @@ document.addEventListener("click", function (event) {
     const movieId = event.target.dataset.id;
 
     fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}`
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${movieApiKey}&language=${movieLanguage}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -166,10 +178,10 @@ document.addEventListener("click", function (event) {
         return response.json();
       })
       .then((movie) => {
-        // 영화의 개봉일, 장르 정보
+        // 영화의 개봉일과 장르 정보 가져오기
         const genreNames = movie.genres.map((genre) => genre.name).join(", ");
 
-        // 개봉일 포멧
+        // 개봉일을 형식에 맞게 포맷팅
         const releaseDate = new Date(movie.release_date);
         const monthNames = [
           "Jan",
@@ -189,12 +201,14 @@ document.addEventListener("click", function (event) {
           monthNames[releaseDate.getMonth()]
         } ${releaseDate.getFullYear()}`;
 
-        // 러닝타임
+        // 영화의 러닝타임을 가져와서 모달에 표시 (시간과 분으로 분리하지 않고 총 분으로 표시)
+
         const runtime = movie.runtime;
         const formattedRuntime = `${runtime}분`;
         document.getElementById("modal-runtime").textContent = formattedRuntime;
 
-        // modal에 정보표시
+        // 모달에 개봉일과 장르 정보 표시
+
         modalTitle.textContent = movie.title;
         modalImg.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
         modalOverview.textContent = movie.overview;
@@ -202,7 +216,7 @@ document.addEventListener("click", function (event) {
         document.getElementById("modal-genre").textContent = genreNames;
         document.getElementById("modal-release-date").textContent =
           formattedReleaseDate;
-        modal.style.display = "block";
+        movieModal.style.display = "block";
       });
   }
 });
