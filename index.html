@@ -13,6 +13,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
     <!-- 폰트 -->
     <link
       href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Noto+Sans+KR:wght@100..900&display=swap"
@@ -158,6 +159,42 @@
         </ul>
       </li>
     </ul>
+
+    <!-- 모달 박스 -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <ul>
+          <li>
+            <img id="modal-img" src="" alt="영화 포스터" />
+          </li>
+          <li>
+            <h2 id="modal-title">영화 제목</h2>
+            <ul class="date">
+              <li>
+                <p id="modal-release-date">개봉일: <span></span></p>
+              </li>
+              <li>
+                <p id="modal-rating">
+                  <i class="fa-solid fa-star"></i> <span id="modal-rate"></span>
+                </p>
+              </li>
+            </ul>
+            <ul class="info">
+              <li>
+                <p id="modal-genre"><span></span></p>
+              </li>
+              <li>
+                <p id="modal-runtime"><span></span></p>
+              </li>
+            </ul>
+
+            <p id="modal-overview">영화 소개</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <script src="js/custom.js"></script>
   </body>
 </html>
