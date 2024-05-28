@@ -86,11 +86,11 @@
   opacity: 1;
 }
 
-#container ul li .posttitle {
+#container .posttitle {
   width: 90%;
-  font-size: 30px;
+  font-size: 28px;
   color: white;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: 1px 1px 2px #000;
   text-align: center;
   word-break: keep-all;
   position: absolute;
@@ -99,20 +99,22 @@
   z-index: 9;
 }
 
-#container ul li .postp {
+#container ul .postp {
   width: 85%;
   height: 40%;
   position: absolute;
-  top: 55%;
+  top: 53%;
   background-color: transparent;
   font-weight: bold;
   text-align: left;
   color: white;
-  text-shadow: 0px 0px 1px black;
+  text-shadow: 0px 0px 1px #000;
   transform: translate(0, -50%);
   opacity: 0;
   z-index: 9;
   overflow: hidden;
+  text-align: justify;
+  font-size: 16px;
 }
 
 #container ul li .postrate {
@@ -244,7 +246,7 @@
 }
 
 #filter .filG {
-  height: 27vh;
+  height: 23%;
   overflow-y: scroll;
 }
 
@@ -258,7 +260,7 @@
 }
 
 #filter.scDown .filG {
-  height: 38vh;
+  height: 34%;
 }
 
 #filter .filG::-webkit-scrollbar {
@@ -266,7 +268,6 @@
 }
 
 #filter .fa-right-from-bracket {
-  margin-top: 25px;
   font-size: 35px;
   color: var(--point-color-orange);
 }
