@@ -82,7 +82,7 @@ function addToWishlist(movieId, title, overview, poster) {
 
 // 모달에 영화 정보 표시하는 함수
 function showMovieModal(movie) {
-  var modal = document.getElementById("movieModal");
+  var wishlistModal = document.getElementById("wishlistModal");
 
   // 영화 정보 설정
   document.getElementById("modal-img").src = movie.poster;
@@ -90,7 +90,7 @@ function showMovieModal(movie) {
   document.getElementById("modal-overview").textContent = movie.overview;
 
   // 모달 표시
-  modal.style.display = "block";
+  wishlistModal.style.display = "block";
 }
 
 // 찜 목록 버튼에 클릭 이벤트 리스너 추가
