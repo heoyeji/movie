@@ -244,7 +244,7 @@
 }
 
 #filter .filG {
-  height: 27vh;
+  height: 23%;
   overflow-y: scroll;
 }
 
@@ -258,7 +258,7 @@
 }
 
 #filter.scDown .filG {
-  height: 38vh;
+  height: 34%;
 }
 
 #filter .filG::-webkit-scrollbar {
@@ -266,7 +266,7 @@
 }
 
 #filter .fa-right-from-bracket {
-  margin-top: 25px;
+  margin-top: 10px;
   font-size: 35px;
   color: var(--point-color-orange);
 }
