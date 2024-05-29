@@ -47,7 +47,7 @@ function searchMovies(query) {
       return response.json();
     })
     .then((data) => {
-      const resultsDiv = document.getElementById("results");
+      const resultsDiv = document.querySelector("#results");
       resultsDiv.innerHTML = ""; // 기존 결과 제거
 
       data.results.forEach((movie) => {
