@@ -73,8 +73,6 @@ fetch(
     console.error("최신순 오류 발생:", error);
   });
 
-
-
 // 영화 정보 받아서 리스트로 만들기
 function createListItem(movie) {
   const listItem = document.createElement("li");

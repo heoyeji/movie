@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
       wishlistContainer.appendChild(li);
     });
+// 모달에 영화 정보 표시하는 함수
+function showMovieModal(movie) {
+  var wishlistModal = document.getElementById("wishlistModal");
 
     modal.style.display = "block";
   }
@@ -44,6 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.style.display = "none";
     });
   }
+  // 모달 표시
+  wishlistModal.style.display = "block";
+}
 
   var wishlistButtons = document.querySelectorAll(".wishlist-button");
   wishlistButtons.forEach(function (button) {

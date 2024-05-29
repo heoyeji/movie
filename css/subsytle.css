@@ -269,6 +269,7 @@
 }
 
 #filter .fa-right-from-bracket {
+  margin-top: 10px;
   font-size: 35px;
   color: var(--point-color-orange);
 }
