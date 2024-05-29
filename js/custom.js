@@ -1,28 +1,9 @@
-const apiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
-const language = "ko-KR";
-
-// modal
-const modal = document.getElementById("modal");
-const modalTitle = document.getElementById("modal-title");
-const modalImg = document.getElementById("modal-img");
-const modalOverview = document.getElementById("modal-overview");
-const modalRate = document.getElementById("modal-rate");
-const span = document.getElementsByClassName("close")[0];
-
-// modal close
-span.onclick = function () {
-  modal.style.display = "none";
-};
-
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
+const movieApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
+const movieLanguage = "ko-KR";
 
 // 인기순
 fetch(
-  `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/popular?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -46,7 +27,7 @@ fetch(
 
 // 평점순
 fetch(
-  `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/top_rated?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -70,7 +51,7 @@ fetch(
 
 // 개봉예정
 fetch(
-  `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/upcoming?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -91,6 +72,8 @@ fetch(
   .catch((error) => {
     console.error("최신순 오류 발생:", error);
   });
+
+
 
 // 영화 정보 받아서 리스트로 만들기
 function createListItem(movie) {
@@ -125,18 +108,8 @@ function createListItem(movie) {
   const likeButton = document.createElement("p");
   likeButton.innerHTML = `<a href="#"><i class="far fa-heart"></i> 찜하기</a>`;
 
-  // 찜하기 하트 이모티콘 이벤트
-  likeButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    const heartIcon = likeButton.querySelector("i");
-    if (heartIcon.classList.contains("far")) {
-      heartIcon.classList.remove("far");
-      heartIcon.classList.add("fas");
-    } else {
-      heartIcon.classList.remove("fas");
-      heartIcon.classList.add("far");
-    }
-  });
+  // 찜하기 버튼에 대한 이벤트 리스너 추가
+  addLikeButtonEventListener(likeButton);
 
   div.appendChild(likeButton);
 
@@ -149,60 +122,3 @@ function createListItem(movie) {
 
   return listItem;
 }
-
-// 상세보기(modalBox)
-document.addEventListener("click", function (event) {
-  if (event.target.classList.contains("detail-btn")) {
-    event.preventDefault();
-    const movieId = event.target.dataset.id;
-
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=${language}`
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("네트워크 상태가 좋지 않습니다.");
-        }
-        return response.json();
-      })
-      .then((movie) => {
-        // 영화의 개봉일, 장르 정보
-        const genreNames = movie.genres.map((genre) => genre.name).join(", ");
-
-        // 개봉일 포멧
-        const releaseDate = new Date(movie.release_date);
-        const monthNames = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ];
-        const formattedReleaseDate = `${releaseDate.getDate()} ${
-          monthNames[releaseDate.getMonth()]
-        } ${releaseDate.getFullYear()}`;
-
-        // 러닝타임
-        const runtime = movie.runtime;
-        const formattedRuntime = `${runtime}분`;
-        document.getElementById("modal-runtime").textContent = formattedRuntime;
-
-        // modal에 정보표시
-        modalTitle.textContent = movie.title;
-        modalImg.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-        modalOverview.textContent = movie.overview;
-        modalRate.textContent = movie.vote_average.toFixed(1);
-        document.getElementById("modal-genre").textContent = genreNames;
-        document.getElementById("modal-release-date").textContent =
-          formattedReleaseDate;
-        modal.style.display = "block";
-      });
-  }
-});

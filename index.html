@@ -199,45 +199,10 @@
     </div>
 
     <!-- JavaScript 코드 -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var wishlistButtons = document.querySelectorAll(".wishlist-button");
-        wishlistButtons.forEach(function (button) {
-          button.addEventListener("click", function () {
-            var movieId = parseInt(button.dataset.movieId);
-            var title = button.dataset.title;
-            var overview = button.dataset.overview;
-            var poster = button.dataset.poster;
-            addToWishlist(movieId, title, overview, poster);
-          });
-        });
-      });
-      document.addEventListener("DOMContentLoaded", function () {
-        var heartIcons = document.querySelectorAll(".fa-heart");
-        heartIcons.forEach(function (icon) {
-          icon.addEventListener("click", function () {
-            var button = icon.parentElement.parentElement; // 부모 요소인 <a> 태그의 부모인 <button> 태그를 찾음
-            var movieId = parseInt(button.dataset.movieId);
-            var title = button.dataset.title;
-            var overview = button.dataset.overview;
-            var poster = button.dataset.poster;
-            addToWishlist(movieId, title, overview, poster);
-          });
-        });
-      });
-      document.addEventListener("DOMContentLoaded", function () {
-        // 찜 목록 버튼에 클릭 이벤트 리스너 추가
-        var wishlistButton = document.getElementById("wishlistButton");
-        wishlistButton.addEventListener("click", openWishlistModal);
-
-        // 찜 목록에 영화 추가
-        addToWishlist(1, "영화 제목", "영화 줄거리", "img/영화포스터.jpg");
-      });
-    </script>
-
     <script src="js/custom.js"></script>
     <script src="js/search.js"></script>
     <script src="js/likelist.js"></script>
-    <script src="js/subcustom.js"></script>
+    <script src="js/detaile.js"></script>
+    <script src="js/likebtn.js"></script>
   </body>
 </html>
