@@ -14,6 +14,53 @@ document.addEventListener("DOMContentLoaded", function () {
       poster: poster,
     };
 
+<<<<<<< HEAD
+    var index = wishlist.findIndex((m) => m.id === movieId);
+
+    if (index === -1) {
+      wishlist.push(movie);
+      alert(`${title}이(가) 찜 목록에 추가되었습니다.`);
+    } else {
+      wishlist.splice(index, 1);
+      alert(`${title}이(가) 찜 목록에서 제거되었습니다.`);
+    }
+
+    updateWishlistModal();
+  }
+
+  function updateWishlistModal() {
+    var wishlistContainer = document.getElementById("wishlist");
+    if (!wishlistContainer) {
+      console.log("wishlistContainer를 찾을 수 없음");
+      return;
+    }
+
+    wishlistContainer.innerHTML = "";
+
+    wishlist.forEach(function (movie) {
+      var li = document.createElement("li");
+      var posterElement = document.createElement("img");
+      posterElement.src = movie.poster;
+      posterElement.alt = movie.title;
+      li.appendChild(posterElement);
+      wishlistContainer.appendChild(li);
+    });
+  }
+
+  function openWishlistModal() {
+    var modal = document.getElementById("wishlistModal");
+    updateWishlistModal();
+    modal.style.display = "block";
+  }
+
+  function closeModals() {
+    var modals = document.querySelectorAll(".modal");
+    modals.forEach(function (modal) {
+      modal.style.display = "none";
+    });
+  }
+
+=======
     if (!wishlist.some((m) => m.id === movieId)) {
       wishlist.push(movie);
       alert(`${title}이(가) 찜 목록에 추가되었습니다.`);
@@ -51,6 +98,7 @@ function showMovieModal(movie) {
   wishlistModal.style.display = "block";
 }
 
+>>>>>>> develop
   var wishlistButtons = document.querySelectorAll(".wishlist-button");
   wishlistButtons.forEach(function (button) {
     button.addEventListener("click", function () {
