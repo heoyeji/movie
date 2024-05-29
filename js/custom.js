@@ -1,9 +1,9 @@
-const apiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
-const language = "ko-KR";
+const movieApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
+const movieLanguage = "ko-KR";
 
 // 인기순
 fetch(
-  `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/popular?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -12,13 +12,7 @@ fetch(
     return response.json();
   })
   .then((data) => {
-    const popularMovies = [
-      data.results[0],
-      data.results[1],
-      data.results[2],
-      data.results[4],
-      data.results[5],
-    ]; // 인기 있는 영화 중 첫 5개만 선택
+    const popularMovies = data.results.slice(0, 5); // 인기 있는 영화 중 첫 5개만 선택
     const popularList = document.querySelector("#popular ul");
     popularList.innerHTML = ""; // 기존에 있던 영화들 제거
 
@@ -33,7 +27,7 @@ fetch(
 
 // 평점순
 fetch(
-  `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/top_rated?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -57,7 +51,7 @@ fetch(
 
 // 개봉예정
 fetch(
-  `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=${language}`
+  `https://api.themoviedb.org/3/movie/upcoming?api_key=${movieApiKey}&language=${movieLanguage}`
 )
   .then((response) => {
     if (!response.ok) {
@@ -68,7 +62,7 @@ fetch(
   .then((data) => {
     const nowPlayingMovies = data.results.slice(0, 5); // 최신순으로 인기 있는 영화 중 첫 5개만 선택
     const nowPlayingList = document.querySelector("#new ul");
-    nowPlayingList.innerHTML = ""; // 기존에 있던 영화들 제거
+    nowPlayingList.innerHTML = ""; // 기존에 있던 영화 제거
 
     nowPlayingMovies.forEach((movie) => {
       const listItem = createListItem(movie);
@@ -79,7 +73,7 @@ fetch(
     console.error("최신순 오류 발생:", error);
   });
 
-// 영화 정보를 받아서 리스트 아이템으로 만드는 함수
+// 영화 정보 받아서 리스트로 만들기
 function createListItem(movie) {
   const listItem = document.createElement("li");
 
@@ -112,23 +106,13 @@ function createListItem(movie) {
   const likeButton = document.createElement("p");
   likeButton.innerHTML = `<a href="#"><i class="far fa-heart"></i> 찜하기</a>`;
 
-  // 하트 이모티콘을 토글하는 클릭 이벤트 추가
-  likeButton.addEventListener("click", (e) => {
-    e.preventDefault(); // 기본 동작 막기
-    const heartIcon = likeButton.querySelector("i");
-    if (heartIcon.classList.contains("far")) {
-      heartIcon.classList.remove("far");
-      heartIcon.classList.add("fas");
-    } else {
-      heartIcon.classList.remove("fas");
-      heartIcon.classList.add("far");
-    }
-  });
+  // 찜하기 버튼에 대한 이벤트 리스너 추가
+  addLikeButtonEventListener(likeButton);
 
   div.appendChild(likeButton);
 
   const detailButton = document.createElement("p");
-  detailButton.innerHTML = `<a href="#">상세보기</a>`;
+  detailButton.innerHTML = `<a href="#" class="detail-btn" data-id="${movie.id}">상세보기</a>`;
   div.appendChild(detailButton);
 
   listItem.appendChild(posterHover);
