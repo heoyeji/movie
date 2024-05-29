@@ -11,23 +11,12 @@ const span = document.getElementsByClassName("close")[0];
 
 // 모달 닫기
 span.onclick = function () {
-  wishlistModal.style.display = "none";
+  movieModal.style.display = "none";
 };
 
 window.onclick = function (event) {
   if (event.target == movieModal) {
     movieModal.style.display = "none";
-  }
-};
-
-// modal close
-span.onclick = function () {
-  modal.style.display = "none";
-};
-
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
   }
 };
 
