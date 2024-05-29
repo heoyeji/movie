@@ -85,7 +85,8 @@ header .fa-user {
   background-size: cover;
   background-position: center center;
   display: flex;
-  align-items: center; /* align-items 속성 활성화 */
+  /* align-items: center; */
+  /* align-items 속성 활성화 */
 }
 
 #visual .video {
