@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
       poster: poster,
     };
 
-<<<<<<< HEAD
     var index = wishlist.findIndex((m) => m.id === movieId);
 
     if (index === -1) {
@@ -60,45 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-=======
-    if (!wishlist.some((m) => m.id === movieId)) {
-      wishlist.push(movie);
-      alert(`${title}이(가) 찜 목록에 추가되었습니다.`);
-    }
-  }
-
-  function openWishlistModal() {
-    var modal = document.getElementById("wishlistModal");
-    var wishlistContainer = document.getElementById("wishlist");
-    wishlistContainer.innerHTML = "";
-
-    wishlist.forEach(function (movie) {
-      var li = document.createElement("li");
-      li.innerHTML = `
-        <img src="${movie.poster}" alt="${movie.title}" />
-        <h3>${movie.title}</h3>
-        <p>${movie.overview}</p>
-      `;
-      wishlistContainer.appendChild(li);
-    });
-// 모달에 영화 정보 표시하는 함수
-function showMovieModal(movie) {
-  var wishlistModal = document.getElementById("wishlistModal");
-
-    modal.style.display = "block";
-  }
-
-  function closeModals() {
-    var modals = document.querySelectorAll(".modal");
-    modals.forEach(function (modal) {
-      modal.style.display = "none";
-    });
-  }
-  // 모달 표시
-  wishlistModal.style.display = "block";
-}
-
->>>>>>> develop
   var wishlistButtons = document.querySelectorAll(".wishlist-button");
   wishlistButtons.forEach(function (button) {
     button.addEventListener("click", function () {

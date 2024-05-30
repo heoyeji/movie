@@ -1,5 +1,12 @@
 @charset "utf-8";
 
+#searchButton {
+  border: none;
+  font-size: 20px;
+  background-color: #fff;
+  color: var(--point-color-orange);
+}
+
 /* container */
 #container {
   background-color: #222;

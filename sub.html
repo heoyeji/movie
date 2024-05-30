@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/subsytle.css" />
+
     <!-- i -->
     <link
       rel="stylesheet"
@@ -33,7 +34,16 @@
         <li class="on"><a href="sub.html">인기순</a></li>
         <li><a href="sub.html">평점순</a></li>
         <li><a href="sub.html">개봉예정</a></li>
-        <li><input /><i class="fa-solid fa-magnifying-glass"></i></li>
+        <li>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="영화를 검색하세요!"
+          />
+          <button id="searchButton">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </li>
         <li>
           <a href="#"><i class="fa-solid fa-user"></i></a>
         </li>
@@ -61,7 +71,8 @@
       <ul class="filG"></ul>
       <i class="fa-solid fa-right-from-bracket filOff"></i>
     </div>
-    <!-- <script src="js/search.js"></script> -->
+
+    <script src="js/search.js"></script>
     <script src="js/sub.js"></script>
   </body>
 </html>
