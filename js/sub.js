@@ -92,8 +92,7 @@ const getmovie = async (e) => {
 
   // 영화 api
   let response = await fetch(
-    `https://api.themoviedb.org/3/movie/${cID}?language=ko-KR&page=${page}
-    `,
+    `https://api.themoviedb.org/3/movie/${cID}?language=ko-KR&page=${page}`,
     options
   );
 
@@ -101,24 +100,6 @@ const getmovie = async (e) => {
 
   let mList = data.results;
   // console.log(mList);
-
-  // if (g) {
-  //   gID = g.target.id;
-  //
-  //     let gresponse = await fetch(
-  //       `https://api.themoviedb.org/3/movie/${cID}?language=ko-KR`,
-  //       options
-  //
-
-  //     let gdata = await response.json();
-
-  //     let mgList = gdata.results;
-  //     console.log(mgList);
-  //   }
-  // }
-
-  // let gIDs = mList[0].genre_ids;
-  // console.log(gIDs);
 
   let show = "";
 
@@ -189,7 +170,7 @@ const getgenres = async () => {
   let loadgname = "";
 
   for (let i = 0; i < gList.length; i++) {
-    loadgname += `<li id="$${engG[i]}">${gList[i].name}</li>`;
+    loadgname += `<li id="${engG[i]}">${gList[i].name}</li>`;
   }
 
   filG.innerHTML = loadgname;
