@@ -4,17 +4,11 @@ const modalTitle = document.getElementById("modal-title");
 const modalImg = document.getElementById("modal-img");
 const modalOverview = document.getElementById("modal-overview");
 const modalRate = document.getElementById("modal-rate");
-const span = document.getElementsByClassName("close")[0];
+const span = document.querySelector("#mclose");
 
 // 모달 닫기
 span.onclick = function () {
   movieModal.style.display = "none";
-};
-
-window.onclick = function (event) {
-  if (event.target == movieModal) {
-    movieModal.style.display = "none";
-  }
 };
 
 // 모달 박스 상세보기 기능 추가

@@ -72,6 +72,7 @@
         <h2>
           인기순<span><a href="#">더보기 ></a></span>
         </h2>
+
         <ul>
           <li>
             <div class="posterhover">
@@ -162,7 +163,9 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>찜 목록</h2>
-        <ul id="wishlist"></ul>
+        <ul id="wishlist">
+          <li><img id="likelist-img" src="" alt="movie poster" /></li>
+        </ul>
         <!-- 여기에 찜 목록이 표시됩니다. -->
       </div>
     </div>
@@ -171,7 +174,7 @@
     <div id="movieModal" class="modal">
       <!-- 아이디를 "movieModal"로 변경 -->
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <span id="mclose">&times;</span>
         <ul>
           <li><img id="modal-img" src="" alt="movie poster" /></li>
           <li>
@@ -203,8 +206,7 @@
     <!-- JavaScript 코드 -->
     <script src="js/custom.js"></script>
     <script src="js/search.js"></script>
-    <script src="js/likelist.js"></script>
     <script src="js/detaile.js"></script>
-    <script src="js/likebtn.js"></script>
+    <script src="js/likelist.js"></script>
   </body>
 </html>

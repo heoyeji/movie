@@ -14,30 +14,41 @@ document.addEventListener("DOMContentLoaded", function () {
       poster: poster,
     };
 
-    if (!wishlist.some((m) => m.id === movieId)) {
+    var index = wishlist.findIndex((m) => m.id === movieId);
+
+    if (index === -1) {
       wishlist.push(movie);
       alert(`${title}이(가) 찜 목록에 추가되었습니다.`);
+    } else {
+      wishlist.splice(index, 1);
+      alert(`${title}이(가) 찜 목록에서 제거되었습니다.`);
     }
+
+    updateWishlistModal();
   }
 
-  function openWishlistModal() {
-    var modal = document.getElementById("wishlistModal");
+  function updateWishlistModal() {
     var wishlistContainer = document.getElementById("wishlist");
+    if (!wishlistContainer) {
+      console.log("wishlistContainer를 찾을 수 없음");
+      return;
+    }
+
     wishlistContainer.innerHTML = "";
 
     wishlist.forEach(function (movie) {
       var li = document.createElement("li");
-      li.innerHTML = `
-        <img src="${movie.poster}" alt="${movie.title}" />
-        <h3>${movie.title}</h3>
-        <p>${movie.overview}</p>
-      `;
+      var posterElement = document.createElement("img");
+      posterElement.src = movie.poster;
+      posterElement.alt = movie.title;
+      li.appendChild(posterElement);
       wishlistContainer.appendChild(li);
     });
-// 모달에 영화 정보 표시하는 함수
-function showMovieModal(movie) {
-  var wishlistModal = document.getElementById("wishlistModal");
+  }
 
+  function openWishlistModal() {
+    var modal = document.getElementById("wishlistModal");
+    updateWishlistModal();
     modal.style.display = "block";
   }
 
@@ -47,9 +58,6 @@ function showMovieModal(movie) {
       modal.style.display = "none";
     });
   }
-  // 모달 표시
-  wishlistModal.style.display = "block";
-}
 
   var wishlistButtons = document.querySelectorAll(".wishlist-button");
   wishlistButtons.forEach(function (button) {
