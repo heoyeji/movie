@@ -220,22 +220,3 @@ header .fa-user {
   margin-top: 15px;
   gap: 5%;
 }
-
-#container ul li div p {
-  width: 40%;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 8px 15px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-#container .wishlist-button .fa-heart {
-  color: var(--point-color-orange);
-}
-
-#container .wishlist-button.on .fa-heart {
-  font-weight: bold;
-}

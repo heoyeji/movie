@@ -47,7 +47,7 @@ let hmenu = document.querySelectorAll(".hmenu li");
 let subtitle = document.querySelector("#subtitle");
 const filC = document.querySelectorAll(".filC li");
 
-let page = 2;
+let page = 1;
 let cID = "popular";
 let gID = "";
 
@@ -70,6 +70,15 @@ for (let i = 0; i < filC.length; i++) {
   });
 }
 
+// "더보기" 링크 클릭시 해당 카테고리의 스타일 변경
+const moreLinks = document.querySelectorAll('a[href^="sub.html"]');
+moreLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const categoryID = link.getAttribute("href").split("=")[1];
+    selectCategory(categoryID);
+  });
+});
+
 // 영화 출력
 const getmovie = async (e) => {
   // 카테고리 선택(제목 바꾸기)
@@ -84,7 +93,7 @@ const getmovie = async (e) => {
     } else if (cID == "top_rated") {
       subname = `평점순`;
     } else if (cID == "upcoming") {
-      subname = `최신순`;
+      subname = `개봉예정`;
     }
 
     subtitle.textContent = subname;

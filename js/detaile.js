@@ -34,7 +34,10 @@ document.addEventListener("click", function (event) {
         return response.json();
       })
       .then((movie) => {
-        const genreNames = movie.genres.map((genre) => genre.name).join(", ");
+        const genreNames = movie.genres
+          .map((genre) => genre.name)
+          .join(",        ");
+
         const releaseDate = new Date(movie.release_date);
         const monthNames = [
           "Jan",

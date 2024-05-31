@@ -79,32 +79,21 @@ function createListItemHTML(movie) {
   } 포스터">
       </div>
       <div>
-      <p
-      class="wishlist-button"
-      data-movie-id="1"
-      data-title="영화 제목"
-      data-overview="영화 줄거리"
-      data-poster="img/가필드.jpg"
-    >
-      <i class="fa-regular fa-heart"></i> 찜하기
-    </p>
+        <button
+          class="wishlist-button"
+          data-movie-id="${movie.id}"
+          data-title="${movie.title}"
+          data-overview="${movie.overview}"
+          data-poster="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+        >
+          <i class="fa-regular fa-heart"></i> 찜하기
+        </button>
         <p><a href="#" class="detail-btn" data-id="${movie.id}">상세보기</a></p>
       </div>
     </li>
   `;
 }
-// 찜하기
 
-// 찜목록
-function addWishlistEventListeners() {
-  const wishlistButtons = document.querySelectorAll(".wishlist-button");
-  wishlistButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const movieId = parseInt(button.dataset.movieId);
-      const title = button.dataset.title;
-      const overview = button.dataset.overview;
-      const poster = button.dataset.poster;
-      addToWishlist(movieId, title, overview, poster);
-    });
-  });
-}
+// URL에서 쿼리 매개변수 가져오기
+const params = new URLSearchParams(window.location.search);
+const categoryId = params.get("id");
