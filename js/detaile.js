@@ -12,6 +12,10 @@ span.onclick = function () {
 };
 
 // 모달 박스 상세보기 기능 추가
+// api key
+const ApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
+const Language = "ko-KR";
+
 // 상세보기(modalBox)
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("detail-btn")) {
@@ -19,7 +23,7 @@ document.addEventListener("click", function (event) {
     const movieId = event.target.dataset.id;
 
     fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${movieApiKey}&language=${movieLanguage}`
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${ApiKey}&language=${Language}`
     )
       .then((response) => {
         if (!response.ok) {
