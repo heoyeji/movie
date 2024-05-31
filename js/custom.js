@@ -12,16 +12,11 @@ fetch(
     return response.json();
   })
   .then((data) => {
-    const popularMovies = data.results.slice(0, 5);
-    const popularList = document.querySelector("#popular ul");
-    popularList.innerHTML = "";
-
-    popularMovies.forEach((movie) => {
-      const listItem = createListItem(movie);
-      popularList.appendChild(listItem);
-    });
-
-    addWishlistEventListeners();
+    const popularMovies = data.results.slice(0, 5); // 인기 있는 영화 중 첫 5개만 선택
+    const popularListHTML = popularMovies
+      .map((movie) => createListItemHTML(movie))
+      .join("");
+    document.querySelector("#popular ul").innerHTML = popularListHTML;
   })
   .catch((error) => {
     console.error("인기순 오류 발생:", error);
@@ -38,16 +33,11 @@ fetch(
     return response.json();
   })
   .then((data) => {
-    const topRatedMovies = data.results.slice(0, 5);
-    const topRatedList = document.querySelector("#best ul");
-    topRatedList.innerHTML = "";
-
-    topRatedMovies.forEach((movie) => {
-      const listItem = createListItem(movie);
-      topRatedList.appendChild(listItem);
-    });
-
-    addWishlistEventListeners();
+    const topRatedMovies = data.results.slice(0, 5); // 평점순으로 인기 있는 영화 중 첫 5개만 선택
+    const topRatedListHTML = topRatedMovies
+      .map((movie) => createListItemHTML(movie))
+      .join("");
+    document.querySelector("#best ul").innerHTML = topRatedListHTML;
   })
   .catch((error) => {
     console.error("평점순 오류 발생:", error);
@@ -64,70 +54,47 @@ fetch(
     return response.json();
   })
   .then((data) => {
-    const nowPlayingMovies = data.results.slice(0, 5);
-    const nowPlayingList = document.querySelector("#new ul");
-    nowPlayingList.innerHTML = "";
-
-    nowPlayingMovies.forEach((movie) => {
-      const listItem = createListItem(movie);
-      nowPlayingList.appendChild(listItem);
-    });
-
-    addWishlistEventListeners();
+    const nowPlayingMovies = data.results.slice(0, 5); // 최신순으로 인기 있는 영화 중 첫 5개만 선택
+    const nowPlayingListHTML = nowPlayingMovies
+      .map((movie) => createListItemHTML(movie))
+      .join("");
+    document.querySelector("#new ul").innerHTML = nowPlayingListHTML;
   })
   .catch((error) => {
     console.error("최신순 오류 발생:", error);
   });
 
-function createListItem(movie) {
-  const listItem = document.createElement("li");
-
-  const posterHover = document.createElement("div");
-  posterHover.classList.add("posterhover");
-
-  const postTitle = document.createElement("h3");
-  postTitle.classList.add("posttitle");
-  postTitle.textContent = movie.title;
-
-  const postP = document.createElement("p");
-  postP.classList.add("postp");
-  postP.textContent = movie.overview;
-
-  const postRate = document.createElement("h4");
-  postRate.classList.add("postrate");
-  postRate.innerHTML = `<i class="fa-solid fa-star"></i> ${movie.vote_average.toFixed(
-    1
-  )}점`;
-
-  const img = document.createElement("img");
-  img.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-  img.alt = movie.title;
-
-  posterHover.appendChild(postTitle);
-  posterHover.appendChild(postP);
-  posterHover.appendChild(postRate);
-  posterHover.appendChild(img);
-
-  const div = document.createElement("div");
-  const likeButton = document.createElement("button");
-  likeButton.classList.add("wishlist-button");
-  likeButton.dataset.movieId = movie.id;
-  likeButton.dataset.title = movie.title;
-  likeButton.dataset.overview = movie.overview;
-  likeButton.dataset.poster = img.src;
-  likeButton.innerHTML = `<i class="fa-regular fa-heart"></i> 찜하기`;
-
-  div.appendChild(likeButton);
-
-  const detailButton = document.createElement("p");
-  detailButton.innerHTML = `<a href="#" class="detail-btn" data-id="${movie.id}">상세보기</a>`;
-  div.appendChild(detailButton);
-
-  listItem.appendChild(posterHover);
-  listItem.appendChild(div);
-
-  return listItem;
+// 영화 정보를 HTML 문자열로 변환
+function createListItemHTML(movie) {
+  return `
+    <li>
+      <div class="posterhover">
+        <h3 class="posttitle">${movie.title}</h3>
+        <p class="postp">${movie.overview}</p>
+        <h4 class="postrate"><i class="fa-solid fa-star"></i> ${movie.vote_average.toFixed(
+          1
+        )}점</h4>
+        <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${
+    movie.title
+  } 포스터">
+      </div>
+      <div>
+      <p
+      class="wishlist-button"
+      data-movie-id="1"
+      data-title="영화 제목"
+      data-overview="영화 줄거리"
+      data-poster="img/가필드.jpg"
+    >
+      <i class="fa-regular fa-heart"></i> 찜하기
+    </p>
+        <p><a href="#" class="detail-btn" data-id="${movie.id}">상세보기</a></p>
+      </div>
+    </li>
+  `;
 }
+
+// // 찜하기 버튼
 
 function addWishlistEventListeners() {
   const wishlistButtons = document.querySelectorAll(".wishlist-button");
@@ -141,3 +108,5 @@ function addWishlistEventListeners() {
     });
   });
 }
+
+addWishlistEventListeners();

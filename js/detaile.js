@@ -4,20 +4,18 @@ const modalTitle = document.getElementById("modal-title");
 const modalImg = document.getElementById("modal-img");
 const modalOverview = document.getElementById("modal-overview");
 const modalRate = document.getElementById("modal-rate");
-const span = document.getElementsByClassName("close")[0];
+const span = document.querySelector("#mclose");
 
 // 모달 닫기
 span.onclick = function () {
   movieModal.style.display = "none";
 };
 
-window.onclick = function (event) {
-  if (event.target == movieModal) {
-    movieModal.style.display = "none";
-  }
-};
-
 // 모달 박스 상세보기 기능 추가
+// api key
+const ApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
+const Language = "ko-KR";
+
 // 상세보기(modalBox)
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("detail-btn")) {
@@ -25,7 +23,7 @@ document.addEventListener("click", function (event) {
     const movieId = event.target.dataset.id;
 
     fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${movieApiKey}&language=${movieLanguage}`
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${ApiKey}&language=${Language}`
     )
       .then((response) => {
         if (!response.ok) {

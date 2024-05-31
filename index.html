@@ -114,11 +114,11 @@
             </div>
             <div>
               <button
-                class="wishlist-button"
-                data-movie-id="1"
+                class="heart"
+                data-movie-id="영화 ids"
                 data-title="영화 제목"
                 data-overview="영화 줄거리"
-                data-poster="img/가필드.jpg"
+                data-poster="영화 포스트"
               >
                 <i class="fa-regular fa-heart"></i> 찜하기
               </button>
@@ -159,6 +159,8 @@
         </ul>
       </li>
     </ul>
+
+    <!-- 위시리스트 -->
     <div id="wishlistModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -177,7 +179,7 @@
     <div id="movieModal" class="modal">
       <!-- 아이디를 "movieModal"로 변경 -->
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <span id="mclose">&times;</span>
         <ul>
           <li><img id="modal-img" src="" alt="movie poster" /></li>
           <li>
@@ -207,10 +209,9 @@
     </div>
 
     <!-- JavaScript 코드 -->
+
     <script src="js/custom.js"></script>
     <script src="js/search.js"></script>
-    <script src="js/likelist.js"></script>
     <script src="js/detaile.js"></script>
-    <script src="js/likebtn.js"></script>
   </body>
 </html>
