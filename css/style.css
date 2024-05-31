@@ -467,3 +467,7 @@ header .fa-user {
   height: auto; /* 포스터의 세로 크기를 가로 크기에 맞게 조정 */
   /* 필요한 다른 스타일 추가 */
 }
+
+#wishlistModal i {
+  color: var(--point-color-orange);
+}

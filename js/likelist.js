@@ -43,10 +43,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     wishlist.forEach(function (movie) {
       var li = document.createElement("li");
+
       var posterElement = document.createElement("img");
       posterElement.src = movie.poster;
       posterElement.alt = movie.title;
       li.appendChild(posterElement);
+
+      var titleSpan = document.createElement("span");
+      titleSpan.textContent = movie.title;
+      li.appendChild(titleSpan);
+
       wishlistContainer.appendChild(li);
     });
   }
