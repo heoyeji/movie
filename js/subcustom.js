@@ -101,24 +101,6 @@ const getmovie = async (e, g) => {
   let mList = data.results;
   console.log(mList);
 
-  // if (g) {
-  //   gID = g.target.id;
-  //
-  //     let gresponse = await fetch(
-  //       `https://api.themoviedb.org/3/movie/${cID}?language=ko-KR`,
-  //       options
-  //
-
-  //     let gdata = await response.json();
-
-  //     let mgList = gdata.results;
-  //     console.log(mgList);
-  //   }
-  // }
-
-  // let gIDs = mList[0].genre_ids;
-  // console.log(gIDs);
-
   let show = "";
 
   for (let i = 0; i < mList.length; i++) {
@@ -133,7 +115,9 @@ const getmovie = async (e, g) => {
     </div>
     <div>
       <p><i class="fa-regular fa-heart"></i> 찜하기</p>
-      <p>상세보기</p>
+      <p><a href="#" class="detail-btn" data-id="${
+        mList[i].id
+      }">상세보기</a></p>
     </div>
   </li>`;
   }

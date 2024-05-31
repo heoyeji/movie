@@ -1,3 +1,6 @@
+const ApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
+const Language = "ko-KR";
+
 // 모달 요소
 const movieModal = document.querySelector("#movieModal");
 const modalTitle = document.getElementById("modal-title");
@@ -17,9 +20,13 @@ document.addEventListener("click", function (event) {
   if (event.target.classList.contains("detail-btn")) {
     event.preventDefault();
     const movieId = event.target.dataset.id;
+    if (!movieId) {
+      console.error("올바른 영화 ID가 없습니다.");
+      return;
+    }
 
     fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${movieApiKey}&language=${movieLanguage}`
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${ApiKey}&language=${Language}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -28,10 +35,7 @@ document.addEventListener("click", function (event) {
         return response.json();
       })
       .then((movie) => {
-        // 영화의 개봉일과 장르 정보 가져오기
         const genreNames = movie.genres.map((genre) => genre.name).join(", ");
-
-        // 개봉일을 형식에 맞게 포맷팅
         const releaseDate = new Date(movie.release_date);
         const monthNames = [
           "Jan",
@@ -51,13 +55,9 @@ document.addEventListener("click", function (event) {
           monthNames[releaseDate.getMonth()]
         } ${releaseDate.getFullYear()}`;
 
-        // 영화의 러닝타임을 가져와서 모달에 표시 (시간과 분으로 분리하지 않고 총 분으로 표시)
-
         const runtime = movie.runtime;
         const formattedRuntime = `${runtime}분`;
         document.getElementById("modal-runtime").textContent = formattedRuntime;
-
-        // 모달에 개봉일과 장르 정보 표시
 
         modalTitle.textContent = movie.title;
         modalImg.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
@@ -67,6 +67,9 @@ document.addEventListener("click", function (event) {
         document.getElementById("modal-release-date").textContent =
           formattedReleaseDate;
         movieModal.style.display = "block";
+      })
+      .catch((error) => {
+        console.error("상세보기 오류 발생:", error);
       });
   }
 });
