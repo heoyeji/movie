@@ -79,7 +79,15 @@ function createListItemHTML(movie) {
   } 포스터">
       </div>
       <div>
-        <p class="wishlist-button"><i class="far fa-heart"></i> 찜하기</p>
+      <p
+      class="wishlist-button"
+      data-movie-id="1"
+      data-title="영화 제목"
+      data-overview="영화 줄거리"
+      data-poster="img/가필드.jpg"
+    >
+      <i class="fa-regular fa-heart"></i> 찜하기
+    </p>
         <p><a href="#" class="detail-btn" data-id="${movie.id}">상세보기</a></p>
       </div>
     </li>

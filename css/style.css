@@ -236,14 +236,6 @@ header .fa-user {
   color: var(--point-color-orange);
 }
 
-#container .wishlist-button.on .fa-heart.in {
+#container .wishlist-button.on .fa-heart {
   font-weight: bold;
-}
-
-/* wish */
-
-.wishlist-poster {
-  width: 100px; /* 포스터의 가로 크기 */
-  height: auto; /* 포스터의 세로 크기를 가로 크기에 맞게 조정 */
-  /* 필요한 다른 스타일 추가 */
 }

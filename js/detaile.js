@@ -14,7 +14,6 @@ span.onclick = function () {
   movieModal.style.display = "none";
 };
 
-// 모달 박스 상세보기 기능 추가
 // 상세보기(modalBox)
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("detail-btn")) {

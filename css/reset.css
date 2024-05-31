@@ -119,6 +119,40 @@ header .fa-user {
   font-size: 30px !important;
 }
 
+/* ===== modal ===== */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+}
+
+.modal-content {
+  border: 5px solid var(--point-color-orange) !important;
+  position: relative;
+  margin: auto;
+  padding: 50px;
+  width: 53vw;
+  background-color: #fff;
+  border-radius: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.modal .close {
+  color: #aaa;
+  float: right;
+  font-size: 25px;
+  font-weight: bold;
+}
+
 /* modal */
 .modal {
   display: none;
@@ -240,4 +274,12 @@ header .fa-user {
   font-size: 18px;
   font-weight: bold;
   color: var(--point-color-orange);
+}
+
+/* wish */
+
+.wishlist-poster {
+  width: 100px; /* 포스터의 가로 크기 */
+  height: auto; /* 포스터의 세로 크기를 가로 크기에 맞게 조정 */
+  /* 필요한 다른 스타일 추가 */
 }

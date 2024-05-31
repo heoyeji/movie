@@ -1,6 +1,7 @@
 const searchApiKey = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
 const searchLanguage = "ko-KR";
 
+// index >> search
 document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("searchInput");
   const searchButton = document.getElementById("searchButton");
