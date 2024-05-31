@@ -3,29 +3,49 @@ console.log("likelist.js 로드됨");
 const API_KEY = "f4b8cdacf728c6b2bd25248d6dd6d6a7";
 const BASE_URL = "https://api.themoviedb.org/3";
 
+function addToWishlist(movieId, title, overview, poster) {
+  var movie = {
+    id: movieId,
+    title: title,
+    overview: overview,
+    poster: poster,
+  };
+
+  var index = wishlist.findIndex((m) => m.id === movieId);
+
+  if (index === -1) {
+    wishlist.push(movie);
+    alert(`${title}이(가) 찜 목록에 추가되었습니다.`);
+  } else {
+    wishlist.splice(index, 1);
+    alert(`${title}이(가) 찜 목록에서 제거되었습니다.`);
+  }
+
+  updateWishlistModal();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   var wishlist = [];
 
-  function addToWishlist(movieId, title, overview, poster) {
-    var movie = {
-      id: movieId,
-      title: title,
-      overview: overview,
-      poster: poster,
-    };
+  // addToWishlist 함수를 정의한 후에 addWishlistEventListeners 함수를 호출
+  addWishlistEventListeners();
 
-    var index = wishlist.findIndex((m) => m.id === movieId);
+  var index = wishlist.findIndex((m) => m.id === movieId);
+  var button = document.querySelector(
+    `.wishlist-button[data-movie-id="${movieId}"]`
+  );
 
-    if (index === -1) {
-      wishlist.push(movie);
-      alert(`${title}이(가) 찜 목록에 추가되었습니다.`);
-    } else {
-      wishlist.splice(index, 1);
-      alert(`${title}이(가) 찜 목록에서 제거되었습니다.`);
-    }
-
-    updateWishlistModal();
+  if (index === -1) {
+    wishlist.push(movie);
+    alert(`${title}이(가) 찜 목록에 추가되었습니다.`);
+    button.classList.add("active"); // 아이콘에 bold 스타일 추가
+  } else {
+    wishlist.splice(index, 1);
+    alert(`${title}이(가) 찜 목록에서 제거되었습니다.`);
+    button.classList.remove("active"); // 아이콘에서 bold 스타일 제거
   }
+
+  updateWishlistModal();
 
   function updateWishlistModal() {
     var wishlistContainer = document.getElementById("wishlist");
@@ -38,10 +58,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     wishlist.forEach(function (movie) {
       var li = document.createElement("li");
+
       var posterElement = document.createElement("img");
       posterElement.src = movie.poster;
       posterElement.alt = movie.title;
       li.appendChild(posterElement);
+
+      var titleSpan = document.createElement("span");
+      titleSpan.textContent = movie.title;
+      li.appendChild(titleSpan);
+
       wishlistContainer.appendChild(li);
     });
   }

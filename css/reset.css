@@ -276,11 +276,10 @@ header .fa-user {
   color: #333;
 }
 
-#container ul li div .wishlist-button i {
+#container .wishlist-button .fa-heart {
   color: var(--point-color-orange);
 }
-
-#container ul li div .wishlist-button.on i {
+#container .wishlist-button.on .fa-heart {
   font-weight: bold;
 }
 
@@ -302,4 +301,9 @@ header .fa-user {
 #wishlist img {
   width: 7vw;
   border-radius: 10px;
+}
+
+.wishlist-button.active .fa-regular {
+  font-weight: bold;
+  color: var(--point-color-orange);
 }
