@@ -132,6 +132,7 @@ getmovie();
 let filG = document.querySelector(".filG");
 let gtitle = document.querySelector(".gtitle");
 
+// 장르목록 불러오기
 const getgenres = async () => {
   let load = await fetch(
     "https://api.themoviedb.org/3/genre/movie/list?language=ko-KR",
@@ -168,18 +169,21 @@ const getgenres = async () => {
 
       gtitle.innerHTML = `<i class="fa-solid fa-grip-lines-vertical"></i>${gname}`;
 
-      searchG(g); // 클릭된 장르의 ID 전달
+      searchG(g); // 클릭된 장르의 ID 전달 + 장르영화 출력
     });
   }
 };
 
+// 장르 영화 불러오기
 const searchG = async (g) => {
+  // 장르id
   if (g) {
     gID = g.target.id;
   }
   console.log(cID);
   console.log(gID);
 
+  // 영화 32p 불러오기
   let gloads = [];
 
   for (let p = 1; p <= 32; p++) {
@@ -194,6 +198,8 @@ const searchG = async (g) => {
   }
 
   let gresponse = await Promise.all(gloads); //Promise.all 사용해 32 페이지를 병렬로 처리
+
+  // 리스트에 받기
   let mgLists = [];
 
   for (ps of gresponse) {
@@ -201,6 +207,7 @@ const searchG = async (g) => {
   }
   console.log(mgLists); //영화 32p
 
+  // 페이지 안에 장르영화 찾기
   let gListon = [];
 
   for (let p = 0; p < mgLists.length; p++) {
@@ -211,9 +218,11 @@ const searchG = async (g) => {
     }
   }
 
+  // 장르영화 페이지 1
   let gListon1 = gListon.slice(0, 20);
   console.log(gListon1);
 
+  // html에 추가
   let mgshow = "";
 
   for (let i = 0; i < gListon1.length; i++) {
