@@ -47,7 +47,7 @@ let hmenu = document.querySelectorAll(".hmenu li");
 let subtitle = document.querySelector("#subtitle");
 const filC = document.querySelectorAll(".filC li");
 
-let page = 1;
+let page = 2;
 let cID = "popular";
 let gID = "";
 
@@ -115,7 +115,7 @@ const getmovie = async (e) => {
     </div>
     <div>
       <p><i class="fa-regular fa-heart"></i> 찜하기</p>
-      <p>상세보기</p>
+      <p class="detail-btn"  data-id="${mList[i].id}">상세보기</p>
     </div>
   </li>`;
   }
