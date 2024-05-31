@@ -12,14 +12,16 @@ fetch(
     return response.json();
   })
   .then((data) => {
-    const popularMovies = data.results.slice(0, 5); // 인기 있는 영화 중 첫 5개만 선택
+    const popularMovies = data.results.slice(0, 5);
     const popularList = document.querySelector("#popular ul");
-    popularList.innerHTML = ""; // 기존에 있던 영화들 제거
+    popularList.innerHTML = "";
 
     popularMovies.forEach((movie) => {
       const listItem = createListItem(movie);
       popularList.appendChild(listItem);
     });
+
+    addWishlistEventListeners();
   })
   .catch((error) => {
     console.error("인기순 오류 발생:", error);
@@ -36,14 +38,16 @@ fetch(
     return response.json();
   })
   .then((data) => {
-    const topRatedMovies = data.results.slice(0, 5); // 평점순으로 인기 있는 영화 중 첫 5개만 선택
+    const topRatedMovies = data.results.slice(0, 5);
     const topRatedList = document.querySelector("#best ul");
-    topRatedList.innerHTML = ""; // 기존에 있던 영화들 제거
+    topRatedList.innerHTML = "";
 
     topRatedMovies.forEach((movie) => {
       const listItem = createListItem(movie);
       topRatedList.appendChild(listItem);
     });
+
+    addWishlistEventListeners();
   })
   .catch((error) => {
     console.error("평점순 오류 발생:", error);
@@ -60,20 +64,21 @@ fetch(
     return response.json();
   })
   .then((data) => {
-    const nowPlayingMovies = data.results.slice(0, 5); // 최신순으로 인기 있는 영화 중 첫 5개만 선택
+    const nowPlayingMovies = data.results.slice(0, 5);
     const nowPlayingList = document.querySelector("#new ul");
-    nowPlayingList.innerHTML = ""; // 기존에 있던 영화 제거
+    nowPlayingList.innerHTML = "";
 
     nowPlayingMovies.forEach((movie) => {
       const listItem = createListItem(movie);
       nowPlayingList.appendChild(listItem);
     });
+
+    addWishlistEventListeners();
   })
   .catch((error) => {
     console.error("최신순 오류 발생:", error);
   });
 
-// 영화 정보 받아서 리스트로 만들기
 function createListItem(movie) {
   const listItem = document.createElement("li");
 
@@ -96,6 +101,7 @@ function createListItem(movie) {
 
   const img = document.createElement("img");
   img.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+  img.alt = movie.title;
 
   posterHover.appendChild(postTitle);
   posterHover.appendChild(postP);
@@ -103,11 +109,13 @@ function createListItem(movie) {
   posterHover.appendChild(img);
 
   const div = document.createElement("div");
-  const likeButton = document.createElement("p");
-  likeButton.innerHTML = `<a href="#"><i class="far fa-heart"></i> 찜하기</a>`;
-
-  // 찜하기 버튼에 대한 이벤트 리스너 추가
-  addLikeButtonEventListener(likeButton);
+  const likeButton = document.createElement("button");
+  likeButton.classList.add("wishlist-button");
+  likeButton.dataset.movieId = movie.id;
+  likeButton.dataset.title = movie.title;
+  likeButton.dataset.overview = movie.overview;
+  likeButton.dataset.poster = img.src;
+  likeButton.innerHTML = `<i class="fa-regular fa-heart"></i> 찜하기`;
 
   div.appendChild(likeButton);
 
@@ -119,4 +127,17 @@ function createListItem(movie) {
   listItem.appendChild(div);
 
   return listItem;
+}
+
+function addWishlistEventListeners() {
+  const wishlistButtons = document.querySelectorAll(".wishlist-button");
+  wishlistButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const movieId = parseInt(button.dataset.movieId);
+      const title = button.dataset.title;
+      const overview = button.dataset.overview;
+      const poster = button.dataset.poster;
+      addToWishlist(movieId, title, overview, poster);
+    });
+  });
 }
