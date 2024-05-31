@@ -47,7 +47,7 @@ let hmenu = document.querySelectorAll(".hmenu li");
 let subtitle = document.querySelector("#subtitle");
 const filC = document.querySelectorAll(".filC li");
 
-let page = 1;
+let page = 2;
 let cID = "popular";
 let gID = "";
 
