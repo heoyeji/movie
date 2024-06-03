@@ -212,3 +212,16 @@ header .fa-user {
 #container ul .fa-star {
   color: var(--point-color-orange);
 }
+
+#container ul li div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  gap: 5%;
+}
+
+#container ul li div .fa-heart {
+  /* color: #e40000; */
+  color: var(--point-color-orange);
+}
