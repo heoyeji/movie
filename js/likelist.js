@@ -113,6 +113,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addWishlistEventListeners();
 });
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop
 window.createListItem = function (movie) {
   const listItem = document.createElement("li");
 

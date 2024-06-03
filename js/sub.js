@@ -1,3 +1,55 @@
+// 필터
+let hmenu = document.querySelectorAll(".hmenu li");
+const filC = document.querySelectorAll(".filC li");
+
+// cID 변경
+const urlid = new URLSearchParams(window.location.search);
+let cID = urlid.get("value");
+console.log(cID);
+
+if (cID == "popular") {
+  // console.log(0);
+  for (j of filC) {
+    j.classList.remove("on");
+  }
+
+  filC[0].classList.add("on");
+
+  for (j of hmenu) {
+    j.classList.remove("on");
+  }
+
+  hmenu[0].classList.add("on");
+} else if (cID == "top_rated") {
+  // console.log(1);
+  for (j of filC) {
+    j.classList.remove("on");
+  }
+
+  filC[1].classList.add("on");
+
+  for (j of hmenu) {
+    j.classList.remove("on");
+  }
+
+  hmenu[1].classList.add("on");
+} else if (cID == "upcoming") {
+  // console.log(2);
+
+  for (j of filC) {
+    j.classList.remove("on");
+  }
+
+  filC[2].classList.add("on");
+
+  for (j of hmenu) {
+    j.classList.remove("on");
+  }
+
+  hmenu[2].classList.add("on");
+}
+
+// 스크롤 다운시 필터
 let filop = document.querySelector(".filopen");
 let fil = document.querySelector("#filter");
 let filout = document.querySelector(".filOff");
@@ -8,7 +60,7 @@ window.addEventListener("scroll", function () {
   let sc = document.documentElement.scrollTop; //현재 스크롤 위치
   //   console.log(sc);
 
-  let scCon = con.offsetTop - 40; //container 위치
+  let scCon = con.offsetTop + 1; //container 위치
 
   if (sc > scCon) {
     filop.classList.add("scDown");
@@ -42,13 +94,10 @@ const options = {
   },
 };
 
-// 요소 끌어오기
-let hmenu = document.querySelectorAll(".hmenu li");
+//
 let subtitle = document.querySelector("#subtitle");
-const filC = document.querySelectorAll(".filC li");
 
-let page = 2;
-let cID = "popular";
+let page = 1;
 let gID = "";
 
 // 카테고리 선택
@@ -114,7 +163,15 @@ const getmovie = async (e) => {
       <img src="https://image.tmdb.org/t/p/w500${mList[i].poster_path}" />
     </div>
     <div>
-      <p><i class="fa-regular fa-heart"></i> 찜하기</p>
+    <button
+    class="wishlist-button"
+    data-movie-id="1"
+    data-title="영화 제목"
+    data-overview="영화 줄거리"
+    data-poster="img/가필드.jpg"
+  >
+    <i class="fa-regular fa-heart"></i> 찜하기
+  </button>
       <p class="detail-btn"  data-id="${mList[i].id}">상세보기</p>
     </div>
   </li>`;
@@ -132,6 +189,7 @@ getmovie();
 let filG = document.querySelector(".filG");
 let gtitle = document.querySelector(".gtitle");
 
+// 장르목록 불러오기
 const getgenres = async () => {
   let load = await fetch(
     "https://api.themoviedb.org/3/genre/movie/list?language=ko-KR",
@@ -139,49 +197,25 @@ const getgenres = async () => {
   );
 
   let datag = await load.json();
-  console.log(datag);
+  // console.log(datag);
 
   let gList = datag.genres;
-
-  // 장르 목록 입력
-
-  const engG = [
-    "action",
-    "adventure",
-    "animation",
-    "comedy",
-    "crime",
-    "documentary",
-    "drama",
-    "family",
-    "fantasy",
-    "history",
-    "horror",
-    "music",
-    "mystery",
-    "romance",
-    "science_fiction",
-    "tv_movie",
-    "thriller",
-    "war",
-    "western",
-  ];
 
   let loadgname = "";
 
   for (let i = 0; i < gList.length; i++) {
-    loadgname += `<li id="${engG[i]}">${gList[i].name}</li>`;
+    loadgname += `<li id="${gList[i].id}">${gList[i].name}</li>`;
   }
 
   filG.innerHTML = loadgname;
-  console.log(loadgname);
+  // console.log(loadgname);
 
   // 장르 선택(+제목 바꾸기)
   let genre = document.querySelectorAll(".filG li");
   let gname = "";
 
   for (let i = 0; i < genre.length; i++) {
-    genre[i].addEventListener("click", () => {
+    genre[i].addEventListener("click", (g) => {
       for (j of genre) {
         j.classList.remove("on");
       }
@@ -192,48 +226,81 @@ const getgenres = async () => {
 
       gtitle.innerHTML = `<i class="fa-solid fa-grip-lines-vertical"></i>${gname}`;
 
-      getmovieG(gList[i].id); // 클릭된 장르의 ID 전달
+      searchG(g); // 클릭된 장르의 ID 전달 + 장르영화 출력
     });
   }
 };
 
-const getmovieG = async (gID) => {
-  console.log(cID);
+getgenres();
 
+// 장르 영화 불러오기
+const searchG = async (g) => {
+  // 장르id
+  if (g) {
+    gID = g.target.id;
+  }
+  console.log(cID);
   console.log(gID);
 
-  let gresponse = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?with_genres=${gID}&language=ko-KR&page=${page}`,
-    options
-  );
+  // 영화 32p 불러오기
+  let gloads = [];
 
-  let gdata = await gresponse.json();
-  let mgList = gdata.results;
-  console.log(mgList);
+  for (let p = 1; p <= 32; p++) {
+    page = p;
 
-  let mgshow = "";
-  let gids = "";
+    let gload = fetch(
+      `https://api.themoviedb.org/3/movie/${cID}?language=ko-KR&page=${page}`,
+      options
+    ).then((response) => response.json());
 
-  for (let i = 0; i < mgList.length; i++) {
-    gids = mgList[i].genre_ids;
-    // console.log(gids);
-    if (gids.includes(gID)) {
-      mgshow += `<li>
-        <div class="posterhover">
-          <h3 class="posttitle">${mgList[i].title}</h3>
-          <p class="postp">${mgList[i].overview}</p>
-          <h4 class="postrate"><i class="fa-solid fa-star"></i> ${mgList[
-            i
-          ].vote_average.toFixed(1)}점</h4>
-          <img src="https://image.tmdb.org/t/p/w500${mgList[i].poster_path}" />
-        </div>
-        <div>
-          <p><i class="fa-regular fa-heart"></i> 찜하기</p>
-          <p>상세보기</p>
-        </div>
-      </li>`;
-      console.log(mgshow);
+    gloads.push(gload);
+  }
+
+  let gresponse = await Promise.all(gloads); //Promise.all 사용해 32 페이지를 병렬로 처리
+
+  // 리스트에 받기
+  let mgLists = [];
+
+  for (ps of gresponse) {
+    mgLists.push(ps.results);
+  }
+  // console.log(mgLists); //영화 32p
+
+  // 페이지 안에 장르영화 찾기
+  let gListon = [];
+
+  for (let p = 0; p < mgLists.length; p++) {
+    for (mG of mgLists[p]) {
+      if (mG.genre_ids.includes(parseInt(gID))) {
+        gListon.push(mG);
+      }
     }
+  }
+
+  // 장르영화 페이지 1
+  let gListon1 = gListon.slice(0, 20);
+  // console.log(gListon1);
+
+  // html에 추가
+  let mgshow = "";
+
+  for (let i = 0; i < gListon1.length; i++) {
+    mgshow += `<li>
+          <div class="posterhover">
+            <h3 class="posttitle">${gListon1[i].title}</h3>
+            <p class="postp">${gListon1[i].overview}</p>
+            <h4 class="postrate"><i class="fa-solid fa-star"></i> ${gListon1[
+              i
+            ].vote_average.toFixed(1)}점</h4>
+            <img src="https://image.tmdb.org/t/p/w500${
+              gListon1[i].poster_path
+            }" />
+          </div>
+          <div>
+            <p><i class="fa-regular fa-heart"></i> 찜하기</p>
+            <p class="detail-btn"  data-id="${gListon1[i].id}">상세보기</p>
+          </div>
+        </li>`;
   }
 
   document.querySelector("#liston").innerHTML = mgshow;
