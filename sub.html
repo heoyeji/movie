@@ -32,9 +32,11 @@
       </h1>
 
       <ul class="hmenu">
-        <li class="on"><a href="sub.html">인기순</a></li>
-        <li><a href="sub.html">평점순</a></li>
-        <li><a href="sub.html">개봉예정</a></li>
+        <li class="on">
+          <a href="sub.html?value=popular" id="subpop">인기순</a>
+        </li>
+        <li><a href="sub.html?value=top_rated" id="subtop">평점순</a></li>
+        <li><a href="sub.html?value=upcoming" id="subup">개봉예정</a></li>
         <li>
           <input
             type="text"
@@ -83,8 +85,10 @@
       <div class="modal-content">
         <span id="mclose">&times;</span>
         <ul>
-          <li><img id="modal-img" src="" alt="movie poster" /></li>
-          <li>
+          <li class="mLeft">
+            <img id="modal-img" src="" alt="movie poster" />
+          </li>
+          <li class="mRight">
             <h2 id="modal-title">영화 제목</h2>
             <ul class="date">
               <li>
@@ -112,7 +116,8 @@
 
     <!-- js -->
     <script src="js/sub.js"></script>
-    <script src="js/search.js"></script>
+    <!-- <script src="js/likelist.js"></script> -->
     <script src="js/detaile.js"></script>
+    <script src="js/search.js"></script>
   </body>
 </html>
