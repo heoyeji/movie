@@ -1,11 +1,14 @@
 // 필터
 let hmenu = document.querySelectorAll(".hmenu li");
 const filC = document.querySelectorAll(".filC li");
+let subtitle = document.querySelector("#subtitle");
 
 // cID 변경
 const urlid = new URLSearchParams(window.location.search);
 let cID = urlid.get("value");
 console.log(cID);
+
+let subname = ``;
 
 if (cID == "popular") {
   // console.log(0);
@@ -20,6 +23,8 @@ if (cID == "popular") {
   }
 
   hmenu[0].classList.add("on");
+
+  subname = `인기순`;
 } else if (cID == "top_rated") {
   // console.log(1);
   for (j of filC) {
@@ -33,6 +38,8 @@ if (cID == "popular") {
   }
 
   hmenu[1].classList.add("on");
+
+  subname = `평점순`;
 } else if (cID == "upcoming") {
   // console.log(2);
 
@@ -47,7 +54,11 @@ if (cID == "popular") {
   }
 
   hmenu[2].classList.add("on");
+
+  subname = `개봉예정`;
 }
+
+subtitle.textContent = subname;
 
 // 스크롤 다운시 필터
 let filop = document.querySelector(".filopen");
@@ -95,7 +106,6 @@ const options = {
 };
 
 //
-let subtitle = document.querySelector("#subtitle");
 
 let page = 1;
 let gID = "";
@@ -103,7 +113,7 @@ let gID = "";
 // 카테고리 선택
 for (let i = 0; i < filC.length; i++) {
   filC[i].addEventListener("click", (e) => {
-    getmovie(e);
+    getmovie(e); //선택시 영화목록 갱신
 
     for (j of filC) {
       j.classList.remove("on");
@@ -123,7 +133,6 @@ for (let i = 0; i < filC.length; i++) {
 const getmovie = async (e) => {
   // 카테고리 선택(제목 바꾸기)
   subname = `인기순`;
-  subtitle.innerHTML = subname;
 
   if (e) {
     cID = e.target.id;
@@ -133,7 +142,7 @@ const getmovie = async (e) => {
     } else if (cID == "top_rated") {
       subname = `평점순`;
     } else if (cID == "upcoming") {
-      subname = `최신순`;
+      subname = `개봉예정`;
     }
 
     subtitle.textContent = subname;
@@ -161,26 +170,31 @@ const getmovie = async (e) => {
       <h4 class="postrate"><i class="fa-solid fa-star"></i> ${mList[
         i
       ].vote_average.toFixed(1)}점</h4>
-      <img src="https://image.tmdb.org/t/p/w500${mList[i].poster_path}" />
+      <img src="https://image.tmdb.org/t/p/w500${mList[i].poster_path}" alt="${
+      mList[i].title
+    } 포스터"/>
     </div>
     <div>
-    <button
-    class="wishlist-button"
-    data-movie-id="1"
-    data-title="영화 제목"
-    data-overview="영화 줄거리"
-    data-poster="img/가필드.jpg"
-  >
+    <button class="wishlist-button" data-movie-id="${
+      mList[i].id
+    }" data-title="${mList[i].title}" data-overview="${
+      mList[i].overview
+    }" data-poster="https://image.tmdb.org/t/p/w500${mList[i].poster_path}">
     <i class="fa-regular fa-heart"></i> 찜하기
   </button>
-      <p class="detail-btn"  data-id="${mList[i].id}">상세보기</p>
+      <p ><a href="#" class="detail-btn" data-id="${
+        mList[i].id
+      }">상세보기</a></p>
     </div>
   </li>`;
   }
 
   document.querySelector("#liston").innerHTML = show;
 
-  getgenres();
+  getgenres(); //장르 목록 출력
+
+  // 찜하기 버튼 이벤트 리스너 추가
+  addWishlistEventListeners();
 };
 
 getmovie();
@@ -295,14 +309,25 @@ const searchG = async (g) => {
             ].vote_average.toFixed(1)}점</h4>
             <img src="https://image.tmdb.org/t/p/w500${
               gListon1[i].poster_path
-            }" />
+            } " alt="${gListon1[i].title} 포스터" />
           </div>
           <div>
-            <p><i class="fa-regular fa-heart"></i> 찜하기</p>
-            <p class="detail-btn"  data-id="${gListon1[i].id}">상세보기</p>
+          <button class="wishlist-button" data-movie-id="${
+            gListon1[i].id
+          }" data-title="${gListon1[i].title}" data-overview="${
+      gListon1[i].overview
+    }" data-poster="https://image.tmdb.org/t/p/w500${
+      gListon1[i].poster_path
+    }"><i class="fa-regular fa-heart"></i> 찜하기</button>
+            <p><a href="#" class="detail-btn" data-id="${
+              gListon1[i].id
+            }">상세보기</a></p>
           </div>
         </li>`;
   }
 
   document.querySelector("#liston").innerHTML = mgshow;
+
+  // 모든 영화 목록이 생성된 후에 찜하기 버튼 이벤트 리스너 추가
+  addWishlistEventListeners();
 };

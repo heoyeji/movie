@@ -220,3 +220,8 @@ header .fa-user {
   margin-top: 15px;
   gap: 5%;
 }
+
+#container ul li div .fa-heart {
+  /* color: #e40000; */
+  color: var(--point-color-orange);
+}
